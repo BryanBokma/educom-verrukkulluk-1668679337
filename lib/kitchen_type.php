@@ -1,6 +1,6 @@
 <?php
 
-class kitchentype {
+class kitchen_type {
 
     private $connection;
 
@@ -8,14 +8,14 @@ class kitchentype {
         $this->connection = $connection;
     }
   
-    public function selecteerkitchentype($kitchentype_id) {
+    public function selecteerkitchen_type($kitchen_type_id) {
 
-        $sql = "select * from kitchentype where id = $kitchentype_id";
+        $sql = "SELECT * FROM kitchen_type WHERE id = $kitchen_type_id";
         
         $result = mysqli_query($this->connection, $sql);
-        $artikel = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $kitchen_type = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-        return($kitchentype);
+        return($kitchen_type);
 
     }
 
