@@ -5,7 +5,7 @@ class ingredient {
     private $art;
     
     public function __construct($connection) {
-    $this->$connection = $connection;
+    $this->connection = $connection;
     $this->art = new artikel($connection);
     }
 
@@ -19,12 +19,12 @@ class ingredient {
         $sql = "select * from ingredient where id = $gerecht_id";
         $return = [];
 
-        $result = mysqli_query($this->$connection, $sql);
+        $result = mysqli_query($this->connection, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
             $art_id = $row["artikel_id"];
-            $artikel = $this->selectArtikel(art_id);
+            $artikel = $this->selectArtikel($art_id);
 
             $return[] = [
 
