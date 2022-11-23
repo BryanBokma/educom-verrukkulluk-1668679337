@@ -19,6 +19,9 @@ class gerecht_info {
     public function selecteerGerecht_info($gerecht_id, $record_type) {
 
         $sql = "SELECT * FROM gerecht_info WHERE gerecht_id = $gerecht_id and record_type = '$record_type'";
+        $sql = "INSERT INTO gerecht_info (favoriet)
+        VALUES ('like', 'like', 'dislike', 'like')";
+        $sql = "DELETE FROM gerecht_info WHERE NAME = 'favoriet'";
         $return = [];
         
         $result = mysqli_query($this->connection, $sql);
