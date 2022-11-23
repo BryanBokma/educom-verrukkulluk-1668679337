@@ -8,9 +8,10 @@ class user {
         $this->connection = $connection;
     }
   
-    public function selecteeruser($user_id) {
+    public function selecteerUser($user_id) {
 
-        $sql = "select * from user where id = $user_id";
+        $sql = "SELECT * FROM user WHERE id = $user_id";
+        echo $sql . "<br>";
         
         $result = mysqli_query($this->connection, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);

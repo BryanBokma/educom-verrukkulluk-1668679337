@@ -14,7 +14,7 @@ class ingredient {
         return($data);
     }
     
-    public function selectIngredienten($gerecht_id) {
+    public function selecteerIngredienten($gerecht_id) {
 
         $sql = "SELECT * FROM ingredient WHERE id = $gerecht_id";
         $return = [];
