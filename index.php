@@ -22,6 +22,8 @@ $gerecht_info = new gerecht_info($db->getConnection());
 //$data_kitchen_type = $kitchen_type->selecteerkitchen_type(2);
 //$data_ingredient = $ingredient->selecteerIngredienten(3);
 $data_gerecht_info = $gerecht_info->selecteerGerecht_info(2,"O");
+$favorites = $gerecht_info->selecteerGerecht_info(2, "F");
+$gerecht_info->addFavorite(2, 4);
 
 /// RETURN
 echo "artikel....................................<pre>"; 
@@ -37,3 +39,4 @@ echo "ingredient.................................<pre>";
 
 echo "gerecht info................................<pre>"; 
 var_dump($data_gerecht_info); echo "</pre>";
+var_dump($favorites); echo "</pre>";
