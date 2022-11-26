@@ -4,36 +4,25 @@ class gerecht {
 
     private $connection;
     private $usr;
-    private $kitchen;
+    private $ingrdnt;
+    private $info;
 
     public function __construct($connection) {
         $this->connection = $connection;
         $this->usr = new user($connection);
-        $this->kitchen = new kitchen_type($connection);
+        $this->ingrdnt = new ingredient($connection);
+        $this->info = new gerecht_info($connection);
     }
 
-    private function selectUser($usr_id) {
-        $data = $this->usr->selecteerUser($usr_id);
+    public function selecteerGerecht($gerecht_id) {
 
-        return($data);
-    }
-
-    private function selectkitchen_type($kitchen_id) {
-        $data = $this->kitchen->selecteerKitchen_type($kitchen_id);
-
-        return($data);
-    }
-
-    public function selecteerGerecht($kitchen_id, $type_id) {
-
-        $sql = "SELECT * FROM gerecht WHERE kitchen_id = $kitchen_id AND type_id = '$type_id'";
+        $sql = "SELECT * FROM gerecht WHERE gerecht_id = $gerecht_id";
 
         $result = mysqli_query($this->connection, $sql);
 
-        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $tmp = [];
 
-            $usr = [];
-            $kitchen = [];
+        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
             $tmp = [
                 "id" => $row["id"],
@@ -45,14 +34,16 @@ class gerecht {
                 "korte_omschrijving" => $row["korte_omschrijving"],
                 "lange_omschrijving" => $row["lange_omschrijving"],
                 "afbeelding" => $row["afbeelding"],
+                "ingredienten" => $this->ingrdnt->selecteerIngredienten($gerecht_id),
+                "user" => $this->usr->selecteerUser($row["user_id"]),
+                "bereidingswijze" => $this->info->selecteerGerecht_info($gerecht_id, "B")
+                //calc price en favo hier?
             ];
 
-            $return[] = $tmp + $usr + $kitchen;
+        }// end while
 
-        }
+        return($tmp);
 
-        return($return);
-
-    }
+    }//end function gerecht
     
-}
+}//end class gerecht
