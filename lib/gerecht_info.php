@@ -9,48 +9,61 @@ class gerecht_info {
         $this->connection = $connection;
         $this->usr = new user($connection);
     }
-
-    private function selecteerUser($usr_id) {
-        $data = $this->usr->selecteerUser($usr_id);
-
-        return($data);
-    }
   
-    public function selecteerGerecht_info($gerecht_id, $record_type) {
+    public function selecteerGerecht_info(int $gerecht_id, string $record_type) {
 
         $sql = "SELECT * FROM gerecht_info WHERE gerecht_id = $gerecht_id AND record_type = '$record_type'";
-        $sql = "INSERT INTO gerecht_info (favoriet)
-        VALUES ('like', 'like', 'dislike', 'like')";
-        $sql = "DELETE FROM gerecht_info WHERE NAME = 'favoriet'";
+
         $return = [];
         
         $result = mysqli_query($this->connection, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-            $usr = [];
             
             $tmp = [
                 "id" => $row["id"],
-                "record_type" => $row["record_type"],
-                "gerecht_id" => $row["gerecht_id"],
-                "datum" => $row["datum"],
-                "nummeriekveld" => $row["nummeriekveld"],
-                "tekstveld" => $row["tekstveld"],
-                "user_id" => $row["user_id"],
+                "datum" => $row["datum"]
             ];
 
-            if($record_type == "O" || $record_type == "F") {
-                $usr_id = $row["user_id"];
-                $usr = $this->selecteerUser($usr_id);
+            if($record_type == "O") {
+                $tmp["user"] = $this->usr->selecteerUser($row["user_id"]);
+                $tmp["opmerking"] = $row["tekstveld"];
+            } 
+            elseif($record_type == "F") {
+                $tmp["user"] = $this->usr->selecteerUser($row["user_id"]);
+            }
+            elseif($record_type == "B") {
+                $tmp["bereiding"] = $row["tekstveld"];
+                $tmp["stap"] = $row["nummeriekveld"];
+            } 
+            elseif($record_type == "W") {
+                $tmp["aantal"] = $row["nummeriekveld"];
             }
 
-            $return[] = $tmp + $usr;
+            $return[] = $tmp;
             
         }//end while function
 
         return($return);
 
     }// end function gerecht_info
+
+public function addFavorite(int $gerecht_id, int $user_id) {
+
+    $sql = "INSERT INTO gerecht_info (`record_type`, `gerecht_id`, `user_id`)
+            VALUES ('F', $gerecht_id, $user_id)";
+
+        mysqli_query($this->connection, $sql);
+}
+
+public function deleteFavorite(int $gerecht_id, int $user_id) {
+
+    $sql = "DELETE FROM gerecht_info
+            WHERE record_type = 'F'
+            AND gerecht_id = $gerecht_id
+            AND user_id = $user_id";
+
+        mysqli_query($this->connection, $sql);               
+}
 
 }// end class gerecht_info
