@@ -20,6 +20,8 @@ class gerecht_twee {
         WHERE gerecht_id = $gerecht_id
         AND titel = $titel";
 
+        $return = [];
+
         mysqli_query($this->connection, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -38,7 +40,11 @@ class gerecht_twee {
                 $tmp["titel"] = ["Eggs en Veggies"];
             }
 
+            $return[] = $tmp;
+
         }//end while 
+
+        return($return);
 
     }//end function meerdereGerechten
 
