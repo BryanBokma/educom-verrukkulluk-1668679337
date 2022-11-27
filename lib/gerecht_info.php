@@ -63,7 +63,7 @@ public function deleteFavorite(int $gerecht_id, int $user_id) {
             AND gerecht_id = $gerecht_id
             AND user_id = $user_id";
 
-        mysqli_query($this->connection, $sql);               
+    mysqli_query($this->connection, $sql);               
 }
 
 }// end class gerecht_info
