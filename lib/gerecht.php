@@ -36,8 +36,9 @@ class gerecht {
                 "afbeelding" => $row["afbeelding"],
                 "ingredienten" => $this->ingrdnt->selecteerIngredienten($gerecht_id),
                 "user" => $this->usr->selecteerUser($row["user_id"]),
-                "bereidingswijze" => $this->info->selecteerGerecht_info($gerecht_id, "B")
-                //calc price en favo hier?
+                "bereidingswijze" => $this->info->selecteerGerecht_info($gerecht_id, "B"),
+                "waardering" => $this->info->selecteerGerecht_info($gerecht_id, "W"),
+                "opmerking" => $this->info->selecteerGerecht_info($gerecht_id, "O")
             ];
 
         }// end while
@@ -45,5 +46,26 @@ class gerecht {
         return($tmp);
 
     }//end function gerecht
+
+    public function calcCalories(int $artikel_id) {
+
+        $sql = "SELECT * FROM artikel
+                WHERE artikel_id = $artikel_id
+                AND verpakking = $verpakking
+                AND calorieen = $calorieen";
+
+            mysqli_query($this->connection, $sql);
+    }//end calcCalories function
+
+    public function calcPrice(int $artikel_id) {
+
+        $sql = "SELECT * FROM artikel
+        WHERE artikel_id = $artikel_id
+        AND verpakking = $verpakking
+        AND prijs = $prijs";
+
+        mysqli_query($this->connection, $sql);
+    }//end calcPrice function
+
     
 }//end class gerecht
