@@ -6,37 +6,17 @@ require_once("lib/user.php");
 require_once("lib/kitchen_type.php");
 require_once("lib/ingredient.php");
 require_once("lib/gerecht_info.php");
+require_once("lib/gerecht.php");
 
 /// INIT
 $db = new database();
-$art = new artikel($db->getConnection());
-$user = new user($db->getConnection());
-$kitchen_type = new kitchen_type($db->getConnection());
-$ingredient = new ingredient($db->getConnection());
-$gerecht_info = new gerecht_info($db->getConnection());
+
+$gerecht = new gerecht($db->getConnection());
+$data_gerecht = $gerecht->selecteerGerecht(2);
 
 
-/// VERWERK 
-//$data_art = $art->selecteerArtikel(2);
-//$data_user = $user->selecteerUser(4);
-//$data_kitchen_type = $kitchen_type->selecteerkitchen_type(2);
-//$data_ingredient = $ingredient->selecteerIngredienten(3);
-$data_gerecht_info = $gerecht_info->selecteerGerecht_info(2,"O");
-$favorites = $gerecht_info->selecteerGerecht_info(2, "F");
-$gerecht_info->addFavorite(2, 4);
 
-/// RETURN
-echo "artikel....................................<pre>"; 
-// var_dump($data_art); echo "</pre>";
+echo "gerecht.....................................<pre>";
+var_dump($data_gerecht); echo "</pre>";
 
-echo "user.......................................<pre>"; 
-// var_dump($data_user); echo "</pre>";
 
-echo "ingredient.................................<pre>"; 
-// var_dump($data_ingredient); echo "</pre>";
-
-//var_dump($data_kitchen_type);
-
-echo "gerecht info................................<pre>"; 
-var_dump($data_gerecht_info); echo "</pre>";
-var_dump($favorites); echo "</pre>";
