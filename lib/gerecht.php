@@ -4,68 +4,109 @@ class gerecht {
 
     private $connection;
     private $usr;
-    private $ingrdnt;
     private $info;
+    private $kitchen;
 
     public function __construct($connection) {
         $this->connection = $connection;
-        $this->usr = new user($connection);
-        $this->ingrdnt = new ingredient($connection);
+        $this->user = new user($connection);
+        $this->ingre = new ingredient($connection);
         $this->info = new gerecht_info($connection);
+        $this->kitchen = new kitchen_type($connection);
     }
+
+    private function selectUser($user_id) {
+        $data = $this->user->selecteerUser($user_id);
+
+        return($data);
+    }//end private function selectUser
+
+    private function selectIngredienten($gerecht_id) {
+        $data = $this->ingre->selecteerIngredienten($gerecht_id);
+
+        return($data);
+    }//end private function selectIngredienten
+
+    private function selectGerecht_info($gerecht_id, $record_type) {
+        $data = $this->info->selecteerGerecht_info($gerecht_id, $record_type);
+
+        return($data);
+    }//end private function selectGerecht_info
+
+    private function selectKitchen_type($kitchen_type_id) {
+        $data = $this->kitchen->selecteerKitchen_type($kitchen_type_id);
+
+        return($data);
+    }//end private function selectKitchen
 
     public function selecteerGerecht($gerecht_id) {
 
-        $sql = "SELECT * FROM gerecht WHERE gerecht_id = $gerecht_id";
+        $sql = "SELECT * FROM gerecht 
+        WHERE id = $gerecht_id";
+
+        $gerechten = [];
 
         $result = mysqli_query($this->connection, $sql);
 
-        $tmp = [];
+        while($gerecht = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
-        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $gerecht_id = $gerecht["id"];
 
-            $tmp = [
-                "id" => $row["id"],
-                "kitchen__id" => $row["kitchen_id"],
-                "type_id" => $row["type_id"],
-                "user_id" => $row["user_id"],
-                "datum" => $row["datum"],
-                "titel" => $row["titel"],
-                "korte_omschrijving" => $row["korte_omschrijving"],
-                "lange_omschrijving" => $row["lange_omschrijving"],
-                "afbeelding" => $row["afbeelding"],
-                "ingredienten" => $this->ingrdnt->selecteerIngredienten($gerecht_id),
-                "user" => $this->usr->selecteerUser($row["user_id"]),
-                "bereidingswijze" => $this->info->selecteerGerecht_info($gerecht_id, "B"),
-                "waardering" => $this->info->selecteerGerecht_info($gerecht_id, "W"),
-                "opmerking" => $this->info->selecteerGerecht_info($gerecht_id, "O")
+            $user_id = $gerecht["user_id"];
+            $user = $this->selectUser($user_id);
+
+            $ingredienten = $this->selectIngredienten($gerecht_id);
+
+            $bereidingswijze = $this->selectGerecht_info($gerecht_id, "B");
+            $opmerkingen = $this->selectGerecht_info($gerecht_id, "O");
+            $waardering = $this->selectGerecht_info($gerecht_id, "W");
+            $favoriet = $this->selectGerecht_info($gerecht_id, "F");
+
+            $kitchen_id = $gerecht["kitchen_id"];
+            $type_id = $gerecht["type_id"];
+            $kitchen = $this->selectKitchen_type($kitchen_id);
+
+            $berekenCalorieen = $this->berekenCalorieenVoorIngredienten($ingredienten);
+            $berekenPrijs = $this->berekenPrijsVoorIngredienten($ingredienten);
+            
+
+            $gerechten = [
+                "user" => $user,
+                "kitchen" => $kitchen,
+                "ingredienten" => $ingredienten,
+                "berekenCalorieen" => $berekenCalorieen,
+                "berekenPrijs" => $berekenPrijs
             ];
 
         }// end while
 
-        return($tmp);
+        return($gerechten);
 
     }//end function gerecht
 
-    public function calcCalories(int $artikel_id) {
+    private function berekenCalorieenVoorIngredienten($ingredienten) {
 
-        $sql = "SELECT * FROM artikel
-                WHERE artikel_id = $artikel_id
-                AND verpakking = $verpakking
-                AND calorieen = $calorieen";
+        $totaal = 0;
 
-            mysqli_query($this->connection, $sql);
-    }//end calcCalories function
+        foreach($ingredienten as $ingredient) {
+            $calorieen = $ingredient["calorieen"]*($ingredient["aantal"]/$ingredient["verpakking"]);
+            //echo($ingredient["aantal"], $ingredient["verpakking"], $ingredient["calorieen"]);
 
-    public function calcPrice(int $artikel_id) {
+            $totaal = $totaal + $calorieen;
 
-        $sql = "SELECT * FROM artikel
-        WHERE artikel_id = $artikel_id
-        AND verpakking = $verpakking
-        AND prijs = $prijs";
+            return($totaal);
+        }
 
-        mysqli_query($this->connection, $sql);
-    }//end calcPrice function
+    }//end berekenCalorieenVoorIngredienten function
 
+    private function berekenPrijsVoorIngredienten($ingredienten) {
+
+        foreach($ingredienten as $ingredient) {
+            $prijs_totaal = $ingredient["prijs"]*$ingredient["aantal"]/$ingredient["verpakking"];
+
+            return($prijs_totaal);
+        }
+    }//end berekenPrijsVoorIngredienten function
     
+
 }//end class gerecht
