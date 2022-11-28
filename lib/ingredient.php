@@ -18,7 +18,8 @@ class ingredient {
 
     public function selecteerIngredienten($gerecht_id) {
 
-        $sql = "SELECT * FROM ingredient WHERE id = $gerecht_id";
+        $sql = "SELECT * FROM ingredient WHERE gerecht_id = $gerecht_id";
+        
         $return = [];
 
         $result = mysqli_query($this->connection, $sql);
