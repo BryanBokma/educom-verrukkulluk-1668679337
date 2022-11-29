@@ -12,41 +12,41 @@ class gerecht_info {
   
     public function selecteerGerecht_info(int $gerecht_id, string $record_type) {
 
-        $sql = "SELECT * FROM gerecht_info WHERE gerecht_id = $gerecht_id AND record_type = '$record_type'";
+        $sql = "SELECT * FROM gerecht_info 
+        WHERE gerecht_id = $gerecht_id 
+        AND record_type = '$record_type'";
 
         $return = [];
         
         $result = mysqli_query($this->connection, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+            $info = [];
+            $user = [];
             
-            $tmp = [
+            $info = [
                 "id" => $row["id"],
+                "gerecht_id" => $row["gerecht_id"],
+                "record_type" => $row["record_type"],
                 "datum" => $row["datum"]
+                "nummeriekveld" => $row["nummeriekveld"],
+                "tekstveld" => $row["tekstveld"]
             ];
 
-            if($record_type == "O") {
-                $tmp["user"] = $this->usr->selecteerUser($row["user_id"]);
-                $tmp["opmerking"] = $row["tekstveld"];
-            } 
-            elseif($record_type == "F") {
-                $tmp["user"] = $this->usr->selecteerUser($row["user_id"]);
-            }
-            elseif($record_type == "B") {
-                $tmp["bereiding"] = $row["tekstveld"];
-                $tmp["stap"] = $row["nummeriekveld"];
-            } 
-            elseif($record_type == "W") {
-                $tmp["aantal"] = $row["nummeriekveld"];
-            }
+            if($record_type == "O" || $record_type == "F")  {
+                $usr_id = $row["user_id"];
+                $user = $this->selectUser($usr_id);
 
-            $return[] = $tmp;
+            $return[] = $info + $user;
             
-        }//end while function
+        }//end if statement
 
         return($return);
 
-    }// end function gerecht_info
+    }// end while function
+
+}//end public function selecteerGerecht_info
 
 public function addFavorite(int $gerechtt_id, int $user_id) {
 
@@ -54,7 +54,7 @@ public function addFavorite(int $gerechtt_id, int $user_id) {
             VALUES ('F', $gerecht_id, $user_id)";
 
             $result = mysqli_query($this->connection, $sql);
-}
+}//end addFavorite function
 
 public function deleteFavorite(int $gerecht_id, int $user_id) {
 
@@ -64,6 +64,6 @@ public function deleteFavorite(int $gerecht_id, int $user_id) {
             AND user_id = $user_id";
 
             $result = mysqli_query($this->connection, $sql);               
-}
+}//end deleteFavorite function
 
 }// end class gerecht_info
