@@ -48,12 +48,12 @@ class gerecht_info {
 
     }// end function gerecht_info
 
-public function addFavorite(int $gerechgerechtt_id, int $user_id) {
+public function addFavorite(int $gerechtt_id, int $user_id) {
 
     $sql = "INSERT INTO gerecht_info (`record_type`, `gerecht_id`, `user_id`)
             VALUES ('F', $gerecht_id, $user_id)";
 
-        mysqli_query($this->connection, $sql);
+            $result = mysqli_query($this->connection, $sql);
 }
 
 public function deleteFavorite(int $gerecht_id, int $user_id) {
@@ -63,7 +63,7 @@ public function deleteFavorite(int $gerecht_id, int $user_id) {
             AND gerecht_id = $gerecht_id
             AND user_id = $user_id";
 
-    mysqli_query($this->connection, $sql);               
+            $result = mysqli_query($this->connection, $sql);               
 }
 
 }// end class gerecht_info
