@@ -44,6 +44,8 @@ class gerecht {
 
         $totaal = 0;
 
+        echo "<hr>";
+
         foreach($ingredienten as $ingredient) {
             $calorieen = $ingredient["calorieen"]*
             ($ingredient["aantal"]/
@@ -63,7 +65,7 @@ class gerecht {
 
             $totaal = $totaal + $calorieen;
             echo ($totaal);
-            echo ( "|");
+            echo ( "<br>");
         }
 
         return($totaal);
@@ -121,7 +123,7 @@ class gerecht {
             $berekenPrijs = $this->berekenPrijsVoorIngredienten($ingredienten);
             
 
-            $gerechten = [
+            $gerechten[] = [
                 "user" => $user,
                 "kitchen" => $kitchen,
                 "ingredienten" => $ingredienten,
