@@ -44,28 +44,12 @@ class gerecht {
 
         $totaal = 0;
 
-        echo "<hr>";
-
         foreach($ingredienten as $ingredient) {
             $calorieen = $ingredient["calorieen"]*
             ($ingredient["aantal"]/
             $ingredient["verpakking"]);
-            $data = $ingredient["calorieen"];
-            echo ($data);
-            echo ( "*");
-            $data = $ingredient["aantal"];
-            echo ($data);
-            echo ( "/");
-            $data = $ingredient["verpakking"];
-            echo ($data);
-            echo ( "=");
-            echo ($calorieen);
-            echo ( "-");
-            
-
+        
             $totaal = $totaal + $calorieen;
-            echo ($totaal);
-            echo ( "<br>");
         }
 
         return($totaal);
@@ -124,6 +108,15 @@ class gerecht {
             
 
             $gerechten[] = [
+                "id" => $row["id"],
+                "kitchen_id" => $row["kitchen_id"],
+                "type_id" => $row["type_id"],
+                "user_id" => $row["user_id"],
+                "datum_toegevoegd" => $row["datum_toegevoegd"],
+                "titel" => $row["titel"],
+                "korte_omschrijving" => $row["korte_omschrijving"],
+                "lange_omschrijving" => $row["lange_omschrijving"],
+                "afbeelding" => $row["afbeelding",]
                 "user" => $user,
                 "kitchen" => $kitchen,
                 "ingredienten" => $ingredienten,
