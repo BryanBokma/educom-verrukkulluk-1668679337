@@ -12,11 +12,11 @@ require_once("lib/gerecht.php");
 $db = new database();
 
 $gerecht = new gerecht($db->getConnection());
-$data_gerecht = $gerecht->selecteerGerecht(2);
+$data = $gerecht->selecteerGerecht();
 
 
 
 echo "gerecht.....................................<pre>";
-var_dump($data_gerecht); echo "</pre>";
+var_dump($data); echo "</pre>";
 
 
