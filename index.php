@@ -1,42 +1,23 @@
 <?php
-
+// Importeer de DB en de verschillende taal scripts:
 require_once("lib/database.php");
 require_once("lib/artikel.php");
 require_once("lib/user.php");
-require_once("lib/kitchen_type.php");
-require_once("lib/ingredient.php");
-require_once("lib/gerecht_info.php");
 
-/// INIT
+/// INIT Link de classes aan variables
 $db = new database();
-$art = new artikel($db->getConnection());
+$artikel = new artikel($db->getConnection());
 $user = new user($db->getConnection());
-$kitchen_type = new kitchen_type($db->getConnection());
-$ingredient = new ingredient($db->getConnection());
-$gerecht_info = new gerecht_info($db->getConnection());
+
+// Verwerk De variable + select functie in een nieuwe variable
+$artikel = $artikel->selecteerArtikel();
+$user = $user->selecteerUser(4);
+
+// Return
+echo "artikel..................................<pre>";
+var_dump($artikel); echo "</pre";
+
+echo "user.....................................<pre>";
+var_dump($user); echo "</pre>";
 
 
-/// VERWERK 
-//$data_art = $art->selecteerArtikel(2);
-//$data_user = $user->selecteerUser(4);
-//$data_kitchen_type = $kitchen_type->selecteerkitchen_type(2);
-//$data_ingredient = $ingredient->selecteerIngredienten(3);
-$data_gerecht_info = $gerecht_info->selecteerGerecht_info(2,"O");
-$favorites = $gerecht_info->selecteerGerecht_info(2, "F");
-$gerecht_info->addFavorite(2, 4);
-
-/// RETURN
-echo "artikel....................................<pre>"; 
-// var_dump($data_art); echo "</pre>";
-
-echo "user.......................................<pre>"; 
-// var_dump($data_user); echo "</pre>";
-
-echo "ingredient.................................<pre>"; 
-// var_dump($data_ingredient); echo "</pre>";
-
-//var_dump($data_kitchen_type);
-
-echo "gerecht info................................<pre>"; 
-var_dump($data_gerecht_info); echo "</pre>";
-var_dump($favorites); echo "</pre>";
