@@ -4,7 +4,7 @@ class artikel {
 
     private $connection; //Door het woordje private kun je de variable alleen binnen de class aanroepen, verder definieer je dus 1 private variable.
 
-    public function __construct($connection) {//Door __construct kun je objecten definnieren
+    public function __construct($connection) {//__construct gaat automatisch af. Op het moment dat je zegt new gaat de constrcutor automatisch af.
         $this->connection = $connection;//Hiermee leg je verbinding naar de database, zodat je de gegevens vanuit de databse kunt ophalen binnen je class/functie.
     }
 

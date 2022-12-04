@@ -16,18 +16,18 @@ class ingredient {
         return($data);// return data is bovenstaande functie selecteerArtikel
     }
 
-    public function selecteerIngredienten(int $gerecht_id) {// waarom pak je hier gerecht_id?
+    public function selecteerIngredienten(int $gerecht_id) {// je pakt gerecht_id
 
         $sql = "SELECT * FROM ingredient
         WHERE gerecht_id = $gerecht_id";// alles selecteren van de ingredient tabel, waarom gerecht_id en niet id?
 
-        $ingredienten = [];// $ingredienten lege array, maar waarom? Omdat die de informatie dan in de lege array kan zetten en dan niet in de while blijft hangen?
+        $ingredienten = [];// $ingredienten lege array, omdat anders de variable niet bestaat. 
 
         $result = mysqli_query($this->connection, $sql); // de query wordt uitgevoerd en hierdoor kun je de data uit de database ophalen, hiervoor wordt connection gebruikt om toegang te krijgen.
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {//Als je een array hebt, heb je altijd een loop!!
 
-            $art_id = $row["artikel_id"];// hierbij definieer je de variable art_id, die je hierboven gebruikt als de rij artikel_id. Maar waarom?
+            $art_id = $row["artikel_id"];// hierbij definieer je de bovenstaande variable $row aan artikel_id, hierbij haalt hij alle gegevens op die horen bij artikel_id en die krijgen de variable art_id
             $artikel = $this->selectArtikel($art_id);// hierbij roep je de private function aan die je hierboven hebt beschreven in de class
 
             $ingredienten[] = [//array aan gegevens die je wilt hebben
