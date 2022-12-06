@@ -20,7 +20,7 @@ class boodschappen {
         $artikel_id = $ingredient["artikel_id"];
 
         $sql = "INSERT INTO boodschappen (artikel_id, user_id, aantal)
-        VALUES ($artikel_id, $user_id, 1)";
+        VALUES ($artikel_id, $user_id, 1)";//
         $result = mysqli_query($this->connection, $sql);
     }//end private function toevoegenArtikel
 
@@ -61,23 +61,6 @@ class boodschappen {
 
     }//end public function ophalenBoodschappen
 
-    public function boodschappenToevoegen($gerecht_id, $user_id) {
-        $ingredienten = $this->selectIngredienten($gerecht_id);
-        echo "<pre>";
-        foreach($ingredienten as $ingredient) {
-            $opgehaald = $this->ArtikelOpLijst($ingredient["artikel_id"], $user_id);
-            var_dump($opgehaald);
-            if(!$opgehaald) {
-                $this->toevoegenArtikel($ingredient, $user_id);
-            }//end if
-            else {
-                $this->artikelBijwerken($opgehaald, $ingredient);
-            }//end else
-
-        }//end foreach
-
-    }//end public function boodschappenToevoegen
-
     public function ArtikelOpLijst($artikel_id, $user_id) {
         $boodschappen = $this->ophalenBoodschappen($user_id);
         foreach($boodschappen as $boodschap) {
@@ -90,6 +73,21 @@ class boodschappen {
         return false;
 
     }//end public function ArtikelOpLijst
+
+    public function boodschappenToevoegen($gerecht_id, $user_id) {
+        $ingredienten = $this->selectIngredienten($gerecht_id);
+        foreach($ingredienten as $ingredient) {
+            $opgehaald = $this->ArtikelOpLijst($ingredient["artikel_id"], $user_id);
+            if(!$opgehaald) {
+                $this->toevoegenArtikel($ingredient, $user_id);
+            }//end if
+            else {
+                $this->artikelBijwerken($opgehaald, $ingredient);
+            }//end else
+
+        }//end foreach
+
+    }//end public function boodschappenToevoegen
 
 }//end class boodschappen
 
