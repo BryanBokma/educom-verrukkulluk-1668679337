@@ -3,30 +3,31 @@
 class gerecht {
 
     private $connection;
-    private $usr;
+    private $keuken_type;
+    private $ingredient;
+    private $user;
     private $info;
-    private $kitchen;
-    private $ingre;
 
     public function __construct($connection) {
         $this->connection = $connection;
+        $this->keuken_type = new keuken_type($connection);
+        $this->ingredient = new ingredient($connection);
         $this->user = new user($connection);
         $this->ingre = new ingredient($connection);
         $this->info = new gerecht_info($connection);
-        $this->kitchen = new kitchen_type($connection);
+        $this->keuken = new keuken_type($connection);
     }
 
+    private function selectIngredienten($gerecht_id) {
+        $data = $this->ingredient->selecteerIngredienten($gerecht_id);
+
+        return($data);
+    }
     private function selectUser($user_id) {
         $data = $this->user->selecteerUser($user_id);
 
         return($data);
-    }//end private function selectUser
-
-    private function selectIngredienten($gerecht_id) {
-        $data = $this->ingre->selecteerIngredienten($gerecht_id);
-
-        return($data);
-    }//end private function selectIngredienten
+    }
 
     private function selectGerecht_info($gerecht_id, $record_type) {
         $data = $this->info->selecteerGerecht_info($gerecht_id, $record_type);
@@ -34,17 +35,17 @@ class gerecht {
         return($data);
     }//end private function selectGerecht_info
 
-    private function selectKitchen_type($kitchen_type_id) {
-        $data = $this->kitchen->selecteerKitchen_type($kitchen_type_id);
+    private function selectKeuken_type($kitchen_type_id) {
+        $data = $this->kitchen->selecteerKeuken_type($kitchen_type_id);
 
         return($data);
-    }//end private function selectKitchen
+    }//end private function selectKeuken_type
 
     private function berekenCalorieenVoorIngredienten($ingredienten) {
 
         $totaal = 0;
 
-        foreach($ingredienten as $ingredient) {//hierbij selecteer je de variable uit ingredienten als ingredient en pak je de bijbehorende waarde uit de tabel.
+        foreach($ingredienten as $ingredient) {
             $calorieen = $ingredient["calorieen"]*
             ($ingredient["aantal"]/
             $ingredient["verpakking"]);
@@ -66,23 +67,22 @@ class gerecht {
             $ingredient["verpakking"]);
 
             $totaal = $totaal + $prijs;
-        }
 
-        return($totaal);
-        
+            return($totaal);
+        }
     }//end berekenPrijsVoorIngredienten function
 
     public function selecteerGerecht($gerecht_id = NULL) {
 
         $sql = "SELECT * FROM gerecht";
 
-        if(!is_null($gerecht_id)) {// als gerecht_id 0 is dan alles selecteren, anders een gerecht weergeven
+        if(!is_null($gerecht_id)) {
 
-            $sql .= " WHERE id = $gerecht_id";
+        $sql .= " WHERE id = $gerecht_id";
 
         }//end if
 
-        $gerechten = [];// lege array voor gerechten, zodat je een return krijgt. 
+        $gerechten = [];
 
         $result = mysqli_query($this->connection, $sql);
 
@@ -102,7 +102,7 @@ class gerecht {
 
             $kitchen_id = $gerecht["kitchen_id"];
             $type_id = $gerecht["type_id"];
-            $kitchen = $this->selectKitchen_type($kitchen_id);
+            $kitchen = $this->selectKeuken_type($keuken_id);
 
             $berekenCalorieen = $this->berekenCalorieenVoorIngredienten($ingredienten);
             $berekenPrijs = $this->berekenPrijsVoorIngredienten($ingredienten);
