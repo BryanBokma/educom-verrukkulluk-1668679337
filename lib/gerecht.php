@@ -44,7 +44,7 @@ class gerecht {
 
         $totaal = 0;
 
-        foreach($ingredienten as $ingredient) {
+        foreach($ingredienten as $ingredient) {//hierbij selecteer je de variable uit ingredienten als ingredient en pak je de bijbehorende waarde uit de tabel.
             $calorieen = $ingredient["calorieen"]*
             ($ingredient["aantal"]/
             $ingredient["verpakking"]);
@@ -66,22 +66,23 @@ class gerecht {
             $ingredient["verpakking"]);
 
             $totaal = $totaal + $prijs;
-
-            return($totaal);
         }
+
+        return($totaal);
+        
     }//end berekenPrijsVoorIngredienten function
 
     public function selecteerGerecht($gerecht_id = NULL) {
 
         $sql = "SELECT * FROM gerecht";
 
-        if(!is_null($gerecht_id)) {
+        if(!is_null($gerecht_id)) {// als gerecht_id 0 is dan alles selecteren, anders een gerecht weergeven
 
-        $sql .= " WHERE id = $gerecht_id";
+            $sql .= " WHERE id = $gerecht_id";
 
         }//end if
 
-        $gerechten = [];
+        $gerechten = [];// lege array voor gerechten, zodat je een return krijgt. 
 
         $result = mysqli_query($this->connection, $sql);
 
@@ -116,7 +117,7 @@ class gerecht {
                 "titel" => $row["titel"],
                 "korte_omschrijving" => $row["korte_omschrijving"],
                 "lange_omschrijving" => $row["lange_omschrijving"],
-                "afbeelding" => $row["afbeelding",]
+                "afbeelding" => $row["afbeelding"],
                 "user" => $user,
                 "kitchen" => $kitchen,
                 "ingredienten" => $ingredienten,
