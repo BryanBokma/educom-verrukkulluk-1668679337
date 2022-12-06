@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 class user {
 
@@ -7,15 +7,17 @@ class user {
     public function __construct($connection) {
         $this->connection = $connection;
     }
-  
+
     public function selecteerUser($user_id) {
 
-        $sql = "SELECT * FROM user WHERE id = $user_id";        
+        $sql = "SELECT * FROM user
+        WHERE id = $user_id";
+
         $result = mysqli_query($this->connection, $sql);
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $user = mysqli_fetch_array(MYSQLI, ASSOC);
 
         return($user);
 
-    }
+    }//end public function selecteerUser
 
-}
+}//end class user
