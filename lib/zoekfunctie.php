@@ -8,23 +8,22 @@ class zoekfunctie {
         $this->connection = $connection;
     }
 
-            public function zoekFunctie($titel) {
+    public function zoekFunctie($titel)
+    {
 
-                $sql = "SELECT * FROM gerecht
-                WHERE titel LIKE '%$titel%'";
+        $sql = "SELECT * FROM gerecht
+        WHERE titel LIKE '%$titel%'";
 
-                $alleinfo = [];
+        $alleinfo = [];
 
-                $result = mysqli_query($this->connection, $sql);
+        $result = mysqli_query($this->connection, $sql);
 
-                while($ophaleninfo = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    $alleinfo[] = $ophaleninfo;
+        while ($ophaleninfo = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $alleinfo[] = $ophaleninfo;
+        } //end while
 
-                }//end while
-
-                return($alleinfo);
-
-        }//end public function zoekFunctie
+        return ($alleinfo);
+    }//end public function zoekFunctie
 
     }//end class zoekfunctie
 
