@@ -10,12 +10,6 @@ class boodschappen {
         $this->ingre = new ingredient($connection);
     }
 
-    private function selectUser($user_id) {
-        $data = $this->user->selecteerUser($user_id);
-
-        return($data);
-    }
-
     private function selectIngredienten($gerecht_id) {
         $data = $this->ingre->selecteerIngredienten($gerecht_id);
 
@@ -26,18 +20,30 @@ class boodschappen {
         $artikel_id = $ingredient["artikel_id"];
 
         $sql = "INSERT INTO boodschappen (artikel_id, user_id, aantal)
-        VALUES ('artikel_id', 'user_id', 'aantal')";
+        VALUES ($artikel_id, $user_id, 1)";
         $result = mysqli_query($this->connection, $sql);
-    }
+    }//end private function toevoegenArtikel
 
-    private function artikelBijwerken($user_id, $artikel_id, $aantal) {// Waarom boodschap en ingredient als variable?
-        $artikel_id = $ingredient["artikel_id"];
+    private function artikelBijwerken($boodschap, $ingredient) {
+        $id = $boodschap["id"];
+        $aantal = $this->berekenAantal($boodschap, $ingredient);
 
         $sql = "UPDATE boodschappen
-        SET aantal = '$aantal'
-        WHERE artikel_id = '$artikel_id'
-        AND user_id = '$user_id'";
+        SET aantal = $aantal
+        WHERE id = $id";
+      
         $result = mysqli_query($this->connection, $sql);
+    }//end private function artikelBijwerken
+
+    private function berekenAantal($boodschap, $ingredient) {
+        $aantal = 0;
+        $aantalboodschap = $boodschap["aantal"];
+        $aantalingredient = $ingredient["aantal"];
+        $verpakkingingredient = $ingredient["verpakking"];
+
+        $berekenaantal = ceil($aantalboodschap + ($aantalingredient / $verpakkingingredient));
+
+        return($berekenaantal);
     }
 
     public function ophalenBoodschappen($user_id) {
@@ -49,21 +55,23 @@ class boodschappen {
         $result = mysqli_query($this->connection, $sql);
         while($boodschappen = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             $return[] = $boodschappen;
-        }
+        }//end while
 
         return($return);
 
-    }
+    }//end public function ophalenBoodschappen
 
     public function boodschappenToevoegen($gerecht_id, $user_id) {
         $ingredienten = $this->selectIngredienten($gerecht_id);
+        echo "<pre>";
         foreach($ingredienten as $ingredient) {
             $opgehaald = $this->ArtikelOpLijst($ingredient["artikel_id"], $user_id);
-        if(!$opgehaald) {
-            $this->toevoegenArtikel($ingredient, $user_id);
+            var_dump($opgehaald);
+            if(!$opgehaald) {
+                $this->toevoegenArtikel($ingredient, $user_id);
             }//end if
-        else {
-            $this->artikelBijwerken($opgehaald, $ingredient);
+            else {
+                $this->artikelBijwerken($opgehaald, $ingredient);
             }//end else
 
         }//end foreach
@@ -79,7 +87,7 @@ class boodschappen {
         
         }//end foreach
 
-        return False;
+        return false;
 
     }//end public function ArtikelOpLijst
 
