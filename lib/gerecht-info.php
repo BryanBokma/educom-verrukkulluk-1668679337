@@ -16,16 +16,20 @@ class gerecht_info {
         return($data);//Uitkomst van de functie
     }
 
-    public function selecteerGerecht_info($gerecht_id, $record_type_id) {// je wilt de info van een gerecht ophalen, record_type heb je nodig voor opmerking en favoriet. 
+    public function selecteerGerecht_info($gerecht_id, $record_type) {// je wilt de info van een gerecht ophalen, record_type heb je nodig voor opmerking en favoriet. 
 
         $sql = "SELECT * FROM gerecht_info
         WHERE gerecht_id = $gerecht_id
-        AND record_type = $record_type";//je selecteert alles van de tabel gerecht_info en hierbij wil je gerecht_id en record_type_id hebben. 
+        AND record_type = '$record_type'";//je selecteert alles van de tabel gerecht_info en hierbij wil je gerecht_id en record_type_id hebben. 
 
         $info = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
         $user = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
 
-        $info = [//gegevens van de array, deze zijn van gerecht_info
+        $result = mysqli_query($this->connection, $sql);
+
+        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            
+        $info[] = [//gegevens van de array, deze zijn van gerecht_info
             "id" => $row["id"],
             "record_type" => $row["record_type"],
             "gerecht_id" => $row["gerecht_id"],
@@ -37,15 +41,17 @@ class gerecht_info {
 
         if($record_type == "O" || $record_type == "F") {
             $user_id = $row["user_id"];
-            $user = $this->user->selectUser($user_id);
+            $user = $this->selectUser($user_id);
 
             $return[] = $info = $user;//als record_type O en/of F is. Dan haalt hij hierbij ook de user op. 
 
+            return($return);
+
         }//end if
 
-        return($return);
+    }//end while   
 
-    }//end public function selecteerGerecht_info
+}//end public function selecteerGerecht_info
 
     public function addFavorite($gerecht_id, $user_id) {// gerecht_id en user_id omdat een user het gerecht als Favoriet aangeeft. 
 

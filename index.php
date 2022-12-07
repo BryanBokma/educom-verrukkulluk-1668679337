@@ -14,8 +14,16 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 /******************************/
 
 /// Next step, iets met je data doen. Ophalen of zo
+require_once("lib/database.php");
+require_once("lib/artikel.php");
+require_once("lib/user.php");
+require_once("lib/keuken_type.php");
+require_once("lib/ingredient.php");
+require_once("lib/gerecht-info.php");
 require_once("lib/gerecht.php");
-$gerecht = new gerecht();
+
+$db = new database();
+$gerecht = new gerecht($db->getConnection());
 $data = $gerecht->selecteerGerecht();
 
 

@@ -17,10 +17,10 @@ $zoekfunctie = new zoekfunctie($db->getConnection());
 $gerecht = new gerecht($db->getConnection());
 
 // Verwerk De variable + select functie in een nieuwe variable
-$zoekfunctie = $zoekfunctie->zoekFunctie("Pizza");
-//$data = $gerecht->selecteerGerecht();
-//$data = $boodschappen->boodschappenToevoegen(1, 1);
+// $zoekfunctie = $zoekfunctie->zoekFunctie("Pizza");
+$data = $gerecht->selecteerGerecht(3);
+// $data = $boodschappen->boodschappenToevoegen(1, 1);
 
 // Return
 echo "zoekfunctie.....................................<pre>";
-var_dump($zoekfunctie); echo "</pre>";
+var_dump($data); echo "</pre>";

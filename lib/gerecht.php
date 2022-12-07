@@ -3,10 +3,9 @@
 class gerecht {
 
     private $connection;
-    private $keuken_type;
-    private $ingredient;
-    private $user;
-    private $info;
+    // private $ingre;
+    // private $user;
+    // private $info;
 
     public function __construct($connection) {
         $this->connection = $connection;
@@ -17,7 +16,7 @@ class gerecht {
     }
 
     private function selectIngredienten($gerecht_id) {
-        $data = $this->ingredient->selecteerIngredienten($gerecht_id);
+        $data = $this->ingre->selecteerIngredienten($gerecht_id);
 
         return($data);
     }
@@ -100,25 +99,31 @@ class gerecht {
 
             $keuken_id = $gerecht["keuken_id"];
             $type_id = $gerecht["type_id"];
-            $kitchen = $this->selectKeuken_type($keuken_id);
+            $keuken = $this->selectKeuken_type($keuken_id);
+            $type = $this->selectKeuken_type($type_id);
 
             $berekenCalorieen = $this->berekenCalorieenVoorIngredienten($ingredienten);
             $berekenPrijs = $this->berekenPrijsVoorIngredienten($ingredienten);
             
 
             $gerechten[] = [
-                "id" => $row["id"],
-                "kitchen_id" => $row["kitchen_id"],
-                "type_id" => $row["type_id"],
-                "user_id" => $row["user_id"],
-                "datum_toegevoegd" => $row["datum_toegevoegd"],
-                "titel" => $row["titel"],
-                "korte_omschrijving" => $row["korte_omschrijving"],
-                "lange_omschrijving" => $row["lange_omschrijving"],
-                "afbeelding" => $row["afbeelding"],
+                "id" => $gerecht["id"],
+                "keuken_id" => $gerecht["keuken_id"],
+                "type_id" => $gerecht["type_id"],
+                "user_id" => $gerecht["user_id"],
+                "datum_toegevoegd" => $gerecht["datum_toegevoegd"],
+                "titel" => $gerecht["titel"],
+                "korte_omschrijving" => $gerecht["korte_omschrijving"],
+                "lange_omschrijving" => $gerecht["lange_omschrijving"],
+                "afbeelding" => $gerecht["afbeelding"],
                 "user" => $user,
-                "kitchen" => $kitchen,
+                "keuken" => $keuken,
                 "ingredienten" => $ingredienten,
+                "bereidingswijze" => $bereidingswijze,
+                "opmerkingen" => $opmerkingen,
+                "waardering" => $waardering,
+                "favoriet" => $favoriet,
+                "type" => $type,
                 "berekenCalorieen" => $berekenCalorieen,
                 "berekenPrijs" => $berekenPrijs
             ];
