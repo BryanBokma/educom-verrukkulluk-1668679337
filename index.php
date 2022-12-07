@@ -11,7 +11,7 @@ $db = new database();
 $art = new artikel($db->getConnection());
 $user = new user($db->getConnection());
 $keuken_type = new keuken_type($db->getConnection());
-$ingredient = new ingredient($db->getConnection());
+$ingre = new ingredient($db->getConnection());
 
 // Verwerk De variable + select functie in een nieuwe variable
 $artikel = $art->selecteerArtikel(2);
@@ -31,8 +31,3 @@ var_dump($keuken_type); echo "</pre>";
 
 echo "ingredient...............................<pre>";
 var_dump($ingredient); echo "</pre>";
-
-
-
-
-

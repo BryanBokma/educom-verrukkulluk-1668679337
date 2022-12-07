@@ -67,4 +67,4 @@ class gerecht_info {
 
 }//end class gerecht_info
 
-       
+?>
