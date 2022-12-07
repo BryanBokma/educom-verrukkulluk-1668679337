@@ -1,33 +1,58 @@
 <?php
-// Importeer de DB en de verschillende taal scripts:
-require_once("lib/database.php");
-require_once("lib/artikel.php");
-require_once("lib/user.php");
-require_once("lib/keuken_type.php");
-require_once("lib/ingredient.php");
+//// Allereerst zorgen dat de "Autoloader" uit vendor opgenomen wordt:
+require_once("./vendor/autoload.php");
 
-/// INIT Link de classes aan variables
-$db = new database();
-$art = new artikel($db->getConnection());
-$user = new user($db->getConnection());
-$keuken_type = new keuken_type($db->getConnection());
-$ingre = new ingredient($db->getConnection());
+/// Twig koppelen:
+$loader = new \Twig\Loader\FilesystemLoader("./templates");
+/// VOOR PRODUCTIE:
+/// $twig = new \Twig\Environment($loader), ["cache" => "./cache/cc"]);
 
-// Verwerk De variable + select functie in een nieuwe variable
-$artikel = $art->selecteerArtikel(2);
-$user = $user->selecteerUser(4);
-$keuken_type = $keuken_type->selecteerKeuken_type(3);
-$ingredient = $ingredient->selecteerIngredienten(2);
+/// VOOR DEVELOPMENT:
+$twig = new \Twig\Environment($loader, ["debug" => true ]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
-// Return
-echo "artikel..................................<pre>";
-var_dump($artikel); echo "</pre";
+/******************************/
 
-echo "user.....................................<pre>";
-var_dump($user); echo "</pre>";
+/// Next step, iets met je data doen. Ophalen of zo
+require_once("lib/gerecht.php");
+$gerecht = new gerecht();
+$data = $gerecht->selecteerGerecht();
 
-echo "keuken_type..............................<pre>";
-var_dump($keuken_type); echo "</pre>";
 
-echo "ingredient...............................<pre>";
-var_dump($ingredient); echo "</pre>";
+/*
+URL:
+http://localhost/index.php?gerecht_id=4&action=detail
+*/
+
+$gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
+$action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
+
+
+switch($action) {
+
+        case "homepage": {
+            $data = $gerecht->selecteerGerecht();
+            $template = 'detail.html.twig';
+            $title = "homepage";
+            break;
+        }
+
+        case "detail": {
+            $data = $gerecht->selecteerGerecht($gerecht_id);
+            $template = 'detail.html.twig';
+            $title = "detail pagina";
+            break;
+        }
+
+        /// etc
+
+}
+
+
+/// Onderstaande code schrijf je idealiter in een layout klasse of iets dergelijks
+/// Juiste template laden, in dit geval "homepage"
+$template = $twig->load($template);
+
+
+/// En tonen die handel!
+echo $template->render(["title" => $title, "data" => $data]);

@@ -10,8 +10,6 @@ class gerecht {
 
     public function __construct($connection) {
         $this->connection = $connection;
-        $this->keuken_type = new keuken_type($connection);
-        $this->ingredient = new ingredient($connection);
         $this->user = new user($connection);
         $this->ingre = new ingredient($connection);
         $this->info = new gerecht_info($connection);
@@ -35,8 +33,8 @@ class gerecht {
         return($data);
     }//end private function selectGerecht_info
 
-    private function selectKeuken_type($kitchen_type_id) {
-        $data = $this->kitchen->selecteerKeuken_type($kitchen_type_id);
+    private function selectKeuken_type($keuken_type_id) {
+        $data = $this->keuken->selecteerKeuken_type($keuken_type_id);
 
         return($data);
     }//end private function selectKeuken_type
@@ -102,7 +100,7 @@ class gerecht {
 
             $keuken_id = $gerecht["keuken_id"];
             $type_id = $gerecht["type_id"];
-            $keuken = $this->selectKeuken_type($keuken_id);
+            $kitchen = $this->selectKeuken_type($keuken_id);
 
             $berekenCalorieen = $this->berekenCalorieenVoorIngredienten($ingredienten);
             $berekenPrijs = $this->berekenPrijsVoorIngredienten($ingredienten);
