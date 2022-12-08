@@ -19,8 +19,9 @@ class gerecht_info {
     public function selecteerGerecht_info($gerecht_id, $record_type) {// je wilt de info van een gerecht ophalen, record_type heb je nodig voor opmerking en favoriet. 
 
         $sql = "SELECT * FROM gerecht_info
-        WHERE gerecht_id = $gerecht_id
+        WHERE gerecht_id = $gerecht_id 
         AND record_type = '$record_type'";//je selecteert alles van de tabel gerecht_info en hierbij wil je gerecht_id en record_type_id hebben. 
+        //linkerkant van het = teken is wat ik in mijn database heb gedefinieerd en aan de rechterkant van het = teken 
 
         $info = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
         $user = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 

@@ -107,15 +107,7 @@ class gerecht {
             
 
             $gerechten[] = [
-                "id" => $gerecht["id"],
-                "keuken_id" => $gerecht["keuken_id"],
-                "type_id" => $gerecht["type_id"],
-                "user_id" => $gerecht["user_id"],
-                "datum_toegevoegd" => $gerecht["datum_toegevoegd"],
-                "titel" => $gerecht["titel"],
-                "korte_omschrijving" => $gerecht["korte_omschrijving"],
-                "lange_omschrijving" => $gerecht["lange_omschrijving"],
-                "afbeelding" => $gerecht["afbeelding"],
+                "gerecht" => $gerecht,
                 "user" => $user,
                 "keuken" => $keuken,
                 "ingredienten" => $ingredienten,

@@ -20,8 +20,8 @@
 {# Loop #}
     <ul>
     {% for record in data %}
-        <li>
-            <img src="{{ record.foto }}" style="width: 100px; heigfht: 100px;">
+        <li> 
+            <img src="assets/img/gerechten/{{record.gerecht.afbeelding}}" style="width: 400px; height: 400px;">
 
             {{ record.title }}
             {# sub-loop #}
@@ -40,9 +40,9 @@
         </li>
     {% endfor %}
     <ul>
-     {# Dump #}
+     <!-- {# Dump #}
        <pre>
         {{ dump(data) }}
-       </pre>
+       </pre> -->
 
 {% endblock %}
