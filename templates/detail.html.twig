@@ -1,5 +1,52 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<h1>Verrukkulluk</h1>
+<img src="assets/img/logo-v2.png" style=""/>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6" style="background-image: url('assets/img/gerechten/{{data.0.gerecht.afbeelding}}')"></div>
+
+<div class="col-md-7" style="background-color: white">
+
+    <div class="row">
+        <div class="col-md-2">
+            <i class="fa fa-file-pdf" style="color:#b31714"></i> 4
+        </div>
+
+        <div class="col-md-2">
+            <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.prijs |round(2)}}
+        </div>
+
+        <div class="col-md-2">
+            <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.calorieen |round(2)}}
+        </div>
+
+</div>
+
+<div class="row">
+    
+    <div class="tab">
+        <button class="tablinks"onclick="opentab(event, 'ingredienten')">Ingredienten</button>
+        <button class="tablinks"onclick="opentab(event, 'bereidingswijze')">bereidingswijze</button>
+        <button class="tablinks"onclick="opentab(event, 'opmerkingen')">opmerkingen</button>
+    </div>
+
+    <div id="ingredienten" class="tabcontent">
+    Ingredienten
+        {% for record in data.0.ingredienten %}
+            {{record.naam}} <br>
+        {% endfor %}
+    </div>
+
+    <div id="bereidingswijze" class="tabcontent">
+        <h3>bereidingswijze</h3>
+        <p>info</p>
+    </div>
+
+    <div id="opmerkingen" class="tabcontent">
+        <h3>opmerkingen</h3>
+        <p>users</p>
+    </div>
+
 {% endblock %}
