@@ -64,20 +64,24 @@
 
     {# Print #}
 
-<div class="container" style="display:flex;">
-<div class="row">
+<!--<div class="container" style="display:flex;">
+	<div class="row"></div>
+</div>-->
 
 {# Loop #}
-    <ul>
+
+<div class="container">
+	<div class="row>">
+    
     {% for record in data %}
-	<div class="col-md-6 p-3 row-eq-height" style="min-height: 400px; max-height: 600px; min-width:350px">
-	<div class="border gerechten shadow">
 
-	<div class="col-md-12" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); background-repeat: no-repeat;"> <br> <br> <br> <br> </div>
+<div class="col-md-6" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); background-repeat: no-repeat; background-position: center; background-size: cover"></div>
+<div class="col-md-6" style="background-color: #F09">
 
-	<div class="row">
-		<div class="col-md-6" style="background-color: white">
-		<h2> {{ record.gerecht.titel }} </h2>
+	<div class="row" style="min-height: 400px";>
+	<div class="col-md-12" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); background-repeat: no-repeat; background-position: center; background-size: cover"></div>
+	
+	<h2> {{ record.gerecht.titel }} 
 
             {# sub-loop #}
             
@@ -91,20 +95,15 @@
                         {%  endif  %}
                     
                 {% endfor %}-->
-
-		</div> {# end div class col-md-6 #}
-	</div> {# end div class row #}
-	</div> {# end div class border gerechten shadow #}
-	</div> {# end col-md-6 p-3 row-eq-height #}
+</div>
         
     {% endfor %}
-    <ul>
+
+	</div>
+</div>
      <!-- {# Dump #}
        <pre>
         {{ dump(data) }}
        </pre> -->
-
-	</div>
-</div>
 
 {% endblock %}
