@@ -1,13 +1,14 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<img src="assets/img/logo-v2.png" style=""/>
+<img src="assets/img/logo-v2.png"/>
 {% endblock %}
 
 {% block content %}
+<div class="row">
 <div class="col-md-6" style="background-image: url('assets/img/gerechten/{{data.0.gerecht.afbeelding}}')"></div>
 
-<div class="col-md-7" style="background-color: white">
+<div class="col-md-6" style="background-color: white">
 
     <div class="row">
         <div class="col-md-2">
@@ -21,18 +22,62 @@
         <div class="col-md-2">
             <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.calorieen |round(2)}}
         </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-8"> 
+            <h2> {{ data.0.gerecht.titel }} </h2>
+        </div>
+        <div class="col-md-4"> 
+            <h3> **** </h3>
+        </div>
+    </div>
+
+    {#keuken#}
+    <div class="row">
+        <div class="col-md-3">
+            <h4> Keuken </h4> 
+        </div>
+        <div class="col-md-3">
+            keuken 
+        </div>
+
+        {#type#}
+        <div class="col-md-3">
+            <h4> Type </h4> 
+        </div>
+        <div class="col-md-3">
+            Type 
+        </div>
+    </div>
+
+    {#omschrijving#}
+    <div class="row">
+    Omschrijving
+    </div>
+
+    {#favoriet#}
+    <div class="row">
+        <div class="col-md-8">
+        Knop 
+        </div>
+        <div class="col-md-4">
+        favoriet
+        </div>
+    </div>
+
+</div>
 </div>
 
 <div class="row">
     
     <div class="tab">
-        <button class="tablinks"onclick="opentab(event, 'ingredienten')">Ingredienten</button>
-        <button class="tablinks"onclick="opentab(event, 'bereidingswijze')">bereidingswijze</button>
-        <button class="tablinks"onclick="opentab(event, 'opmerkingen')">opmerkingen</button>
+        <button class="tablinks" onclick="openTab(event, 'Ingredienten')">Ingredienten</button>
+        <button class="tablinks" onclick="openTab(event, 'Bereidingswijze')">Bereidingswijze</button>
+        <button class="tablinks" onclick="openTab(event, 'Opmerkingen')">Opmerkingen</button>
     </div>
 
-    <div id="ingredienten" class="tabcontent">
+    <div id="Ingredienten" class="tabcontent">
     Ingredienten
         {% for record in data.0.ingredienten %}
             {{record.naam}} <br>
@@ -48,5 +93,8 @@
         <h3>opmerkingen</h3>
         <p>users</p>
     </div>
+
+</div>
+
 
 {% endblock %}
