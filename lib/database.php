@@ -2,8 +2,8 @@
 
 // Aanpassen naar je eigen omgeving
 define("USER", "root");
-define("PASSWORD", "");
-define("DATABASE", "verrukkulluk");
+define("PASSWORD", "root");
+define("DATABASE", "verbb");
 define("HOST", "localhost");
 
 class database {

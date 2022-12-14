@@ -17,21 +17,20 @@
 	</head>
 
 <body>
+
 	<div class="container-fluid">
 
 		<div class="row">
 			<div class="col-md-12" style="background-image: url('assets/img/website/achtergrond-header-website.jpg')"> 
-				{% block header %}
-				{% endblock %}
+				<h1>Header</h1>
 			</div>
-				{# end div background image #}
 		</div>
-			<!-- end div class row -->
 
 		<div class="row">
-				<div class="col-md-3 p-5">
 
-					<div class="col-md-12 p-5" style="background-color: green">
+				<div class="col-md-3">
+
+					<div class="col-md-12 p-2 m-3" style="background-color: green">
 						<center><img src="assets/img/verrukkulluk-agenda.png" style="width: auto; height: 100px;"/></center>
 						<h2>
 							<i class="fa fa-calendar" style="color:white"></i>
@@ -63,11 +62,12 @@
 						<p>
 							Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p><br>
 					</div>
+				
 					<!-- col-md-12 -->
 
 
-					<div class="col-md-12 p-5" style="background-color: red">
-						<center><img src="assets/img/verrukkulluk-login.png" style="width: auto; height: 100px;"/><center>
+					<div class="col-md-12 p-2 m-3" style="background-color: red">
+						<img src="assets/img/verrukkulluk-login.png" style="width: auto; height: 100px;"/>
 
 								<form role="form">
 									<div class="form-group">
@@ -98,43 +98,39 @@
 									</div>
 									<!--end div class form group login button -->
 
-								</div>
+								</form>
 								<!-- end div class col-md-12 login -->
-							</div>
-						</div>
-						<!-- end col-md-3 voor agenda en login -->
 					</div>
-					<!-- end row agenda + login -->
-
+					
 				</div>
 
 				<div class="col-md-9">
 					<div class="row"> 
-					{%  block content %}
-					{%  endblock %}
+						<div  class="col-md-12">
+							<h1>CONTENT</h1>
+							{# {%  block content %}
+							{%  endblock %} #}
+						</div>
 					</div>
 						{# end div class row#}
 				</div>
 					{# end div class col-md-9 Content #}
-
-					
-
 		</div>
 
 		<div class="row" style="background-color: orange">
-						<div class="col-md-12 p-5">
-							<img src="assets/img/verrukkulluk-pay-off.png" style="width: 150px; height: 150px;"/>
-							<img src="assets/img/verrukkulluk-contact.png" style="width: 150px; height: 150px;"/>
-							<address>
-								<font color="white">Verrukkulluk.nl<br>
-									Poststraat 2b<br>
-									Sittard<br>
-									info@verrukkulluk.nl</font>
-							</address>
-						</div>
+			 <div class="col-md-12 p-5">
+				<img src="assets/img/verrukkulluk-pay-off.png" style="width: 150px; height: 150px;"/>
+				<img src="assets/img/verrukkulluk-contact.png" style="width: 150px; height: 150px;"/>
+				<address>
+					<font color="white">Verrukkulluk.nl<br>
+						Poststraat 2b<br>
+						Sittard<br>
+						info@verrukkulluk.nl</font>
+				</address>
+			</div>
 						{# end div class col-md-12 Contact #}
-					</div>
-		</div>			
+		</div>
+	</div>			
 </body>
 
 </html>
