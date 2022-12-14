@@ -19,13 +19,11 @@
 		<div class="col-md-12" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); width:100%; background-repeat: no-repeat"></div>	
 	</div>
 
+    <div class="row"> <!-- begin gerecht.titel -->
+        <div class="col-md-6">
 		<h2 style="color: #6e8722;"> {{ record.gerecht.titel }} </h2>
-		<p> {{ record.gerecht.korte_omschrijving }} </p>
+        </div>
 
-		<button type="button" class="btn btn-danger"><h6>Smullen!</h6></a></button>
-		<i class="fas fa-user-friends" style="color:red;"></i>
-
-	
 
             {# sub-loop #}
             
@@ -33,14 +31,38 @@
                     
                 {% endfor %}-->
 
+        <div class="col-md-6" style="background-color: #FFF"> <h3> **** </h3> </div>
+    </div> <!-- end div class row gerecht.titel -->
+
+    <div class="row"> <!-- korte omschrijving -->
+        <div class="col-md-12" style = "background-color: #FFF; min-height: 150px">
+         {{ record.gerecht.korte_omschrijving }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6" style="background-color: #FFF"> 
+            <button type="button" class="btn btn-danger"><h6>Smullen!</h6></a></button>
+        </div>
+        <div class="col-md-2" style="background-color: #FFF">
+		    <i class="fas fa-user-friends" style="color:red;"></i> 4
+        </div>
+        <div class="col-md-2" style="background-color: #FFF"> 
+            <i class="fa fa-euro-sign" style="color:red"></i> {{ record.berekenPrijs |round(2)}}
+        </div>
+        <div class="col-md-2" style="background-color: #FFF"> 
+            <i class="fa fa-fire" style="color:red"></i> {{ record.berekenCalorieen |round(0)}}
+        </div>
+    </div>
+
 	</div>
         
     {% endfor %}
 	
 
-     <!-- {# Dump #}
+      {# Dump #}
        <pre>
         {{ dump(data) }}
-       </pre> -->
+       </pre> 
 
 {% endblock %}

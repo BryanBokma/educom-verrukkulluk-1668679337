@@ -6,7 +6,8 @@
 
 {% block content %}
 <div class="row">
-<div class="col-md-6" style="background-image: url('assets/img/gerechten/{{data.0.gerecht.afbeelding}}')"></div>
+<div class="col-md-6" style="background-image: url('assets/img/gerechten/{{data.0.gerecht.afbeelding}}'); background-position: center; background-size: cover"></div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <div class="col-md-6" style="background-color: white">
 
@@ -33,68 +34,8 @@
         </div>
     </div>
 
-    {#keuken#}
-    <div class="row">
-        <div class="col-md-3">
-            <h4> Keuken </h4> 
-        </div>
-        <div class="col-md-3">
-            keuken 
-        </div>
-
-        {#type#}
-        <div class="col-md-3">
-            <h4> Type </h4> 
-        </div>
-        <div class="col-md-3">
-            Type 
-        </div>
     </div>
-
-    {#omschrijving#}
-    <div class="row">
-    Omschrijving
-    </div>
-
-    {#favoriet#}
-    <div class="row">
-        <div class="col-md-8">
-        Knop 
-        </div>
-        <div class="col-md-4">
-        favoriet
-        </div>
-    </div>
-
 </div>
 </div>
-
-<div class="row">
-    
-    <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Ingredienten')">Ingredienten</button>
-        <button class="tablinks" onclick="openTab(event, 'Bereidingswijze')">Bereidingswijze</button>
-        <button class="tablinks" onclick="openTab(event, 'Opmerkingen')">Opmerkingen</button>
-    </div>
-
-    <div id="Ingredienten" class="tabcontent">
-    Ingredienten
-        {% for record in data.0.ingredienten %}
-            {{record.naam}} <br>
-        {% endfor %}
-    </div>
-
-    <div id="bereidingswijze" class="tabcontent">
-        <h3>bereidingswijze</h3>
-        <p>info</p>
-    </div>
-
-    <div id="opmerkingen" class="tabcontent">
-        <h3>opmerkingen</h3>
-        <p>users</p>
-    </div>
-
-</div>
-
 
 {% endblock %}
