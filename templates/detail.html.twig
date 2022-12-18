@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-<div class="col-md-6" style="background-image: url('assets/img/gerechten/{{data.0.gerecht.afbeelding}}'); background-position: center; background-size: cover"></div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="row p-5">
+    <div class="col-md-6" style="background-image: url('assets/img/gerechten/{{data.0.gerecht.afbeelding}}'); background-position: center; background-size: cover"></div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-<div class="col-md-6" style="background-color: white">
+<div class="col-md-6">
 
     <div class="row">
         <div class="col-md-2">
@@ -17,25 +17,89 @@
         </div>
 
         <div class="col-md-2">
-            <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.prijs |round(2)}}
+            <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.berekenPrijs |round(2)}}
         </div>
 
         <div class="col-md-2">
-            <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.calorieen |round(2)}}
+            <i class="fa fa-file-pdf" style="color:#b31714"></i> {{ data.0.berekenCalorieen |round(2)}}
         </div>
-    </div>
+    </div> <!-- end row personen/prijs/calorieen -->
 
     <div class="row">
-        <div class="col-md-8"> 
+        <div class="col-md-11"> 
             <h2> {{ data.0.gerecht.titel }} </h2>
         </div>
-        <div class="col-md-4"> 
+        <div class="col-md-1"> 
             <h3> **** </h3>
         </div>
+    </div> <!-- end row gerecht-titel en favoriet -->
+
+    <div class="row">
+        <div class="col-md-3">
+            <h4> Keuken </h4>
+        </div>
+        <div class="col-md-3">
+            {{data.0.keuken.omschrijving}}
+        </div>
+
+        <div class="col-md-3">
+            <h4> Type <h4>
+        </div>
+        <div class="col-md-3">
+        {{data.0.type.omschrijving}}
+        </div>
+    </div> <!-- end row keuken/type omschrijving -->
+
+    <div class="row">
+        {{data.0.gerecht.lange_omschrijving}}
+    </div> <!-- end row gerecht-lange_omschrijving -->
+
+    <div class="row">
+        <div class="col-md-11">
+           <a href="http://localhost/educom-verrukkulluk-1668679337/index.php?gerecht_id=2&action=detail"  style="text-decoration: none"> <button class="button" style="background-color: red">Op Lijst</button> </a> 
+        </div>
+        <div class="col-md-1">
+            <i class="fa fa-heart fa-2x" style="color: red"></i>
+        </div>
+    </div> <!-- end row smullen button en favoriet -->
+
+</div> <!-- end col-md-6 rechtse column -->
+
+
+</div> <!-- end div class row p-5 -->
+
+<div class="row">
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Ingredienten')">Ingredienten</button>
+        <button class="tablinks" onclick="openTab(event, 'Bereidingswijze')">Bereidingswijze</button>
+        <button class="tablinks" onclick="openTab(event, 'Opmerkingen')">Opmerkingen</button>
     </div>
 
+    <div id="Ingredienten" class="tabcontent">
+         {% for record in data.0.ingredienten %}
+            <div class="row">
+                <div class="col-md-11">
+                    <h2> {{record.naam}} </h2>
+                    <div> {{record.omschrijving}} </div>
+                    <span class="hgreen"> Hoeveelheid: </span>        
+                    <span>  {{record.aantal}} {{record.eenheid}} </span>
+                </div> {# Einde div md-11 #}
+            </div> {# Einde row class #}
+        {% endfor %}
+    </div> <!-- end Ingredienten tab -->
+
+    <div id="Bereidingswijze" class="tabcontent">
+        <h3>Bereidingswijze</h3>
+            <p>Hier komt de data voor de bereidingswijze</p>
     </div>
-</div>
-</div>
+
+    <div id="Opmerkingen" class="tabcontent">
+        <h3>Opmerkingen</h3>
+            <p>Opmerkingen hier</p>
+    </div>
+
+</div> <!-- end row tabs detail pagina -->
+
 
 {% endblock %}

@@ -2,43 +2,65 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<img src="assets/img/logo-v2.png"/>
+
+<script>
+        $(document).ready( function() {
+
+            const mySlides = $("#mySlides").MySlides({
+
+                const mySlides = [
+                    { src: "assets/img/gerechten/Scrambled-Eggs-With-Vegetables.jpg"},
+                    { src: "assets/img/gerechten/Vegan_Burger.jpg" },
+                    { src: "assets/img/gerechten/Sushi_Rolls.webp" },
+                    { src: "assets/img/gerechten/Pizza_Green.jpg" }
+                ]//end slides/image
+
+            })//end const mySlides
+
+            $("#background-image").vegas ({
+                overlay: 'assets/vegas/overlays/02.png',
+                slides: mySlides,
+                })//end . vegas
+
+        })//end .ready function
+
+    
+    </script>
+
 {% endblock %}
 
 
 {# nu de block content op in de main pagina vullen #}
 {% block content %}
 
-
-
 {# Loop #}
     {% for record in data %}
-	<div class="col-md-6 p-5" style="background-color: #fff">
-
+<div class="col-md-6 p-5">
+    
 	<div class="row" style="min-height: 400px">
-		<div class="col-md-12" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); width:100%; background-repeat: no-repeat"></div>	
+		<div class="col-md-12" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>	
 	</div>
 
-    <div class="row"> <!-- begin gerecht.titel -->
-        <div class="col-md-6">
-		<h2 style="color: #6e8722;"> {{ record.gerecht.titel }} </h2>
+    <div class="row"> 
+        <div class="col-md-6" style="background-color: #FFF">
+		    <h2 style="color: #6e8722;"> {{ record.gerecht.titel }} </h2>
+        </div> 
+        <div class="col-md-6"> 
+            <h3> **** </h3> 
         </div>
+    </div>
 
-
-            {# sub-loop #}
+     {# sub-loop #}
             
                 <!--{% for ingr in record.ingredienten %}
                     
                 {% endfor %}-->
 
-        <div class="col-md-6" style="background-color: #FFF"> <h3> **** </h3> </div>
-    </div> <!-- end div class row gerecht.titel -->
-
-    <div class="row"> <!-- korte omschrijving -->
+    <div class="row"> 
         <div class="col-md-12" style = "background-color: #FFF; min-height: 150px">
          {{ record.gerecht.korte_omschrijving }}
         </div>
-    </div>
+    </div> 
 
     <div class="row">
         <div class="col-md-6" style="background-color: #FFF"> 
@@ -55,14 +77,13 @@
         </div>
     </div>
 
-	</div>
+</div>
         
     {% endfor %}
-	
 
-      {# Dump #}
+      <!--{# Dump #}
        <pre>
         {{ dump(data) }}
-       </pre> 
+       </pre> -->
 
 {% endblock %}

@@ -10,28 +10,32 @@
 		<link rel="stylesheet" type="text/css" href="assets/css/fonts.css"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css"/>
 
+		<link rel="stylesheet" href="css/vegas-style.css" />   
+   	 	<link rel="stylesheet" href="vegas/vegas.css" /> 
+
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
 
 		<script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
 		<script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+		<script src="js/jquery.js"></script>
+    	<script src="vegas/vegas.js"></script>
 	</head>
 
 <body>
-	<div class="container-fluid">
+
+	<div class="container-fluid" style="width: 2200px">
 
 		<div class="row">
 			<div class="col-md-12" style="background-image: url('assets/img/website/achtergrond-header-website.jpg')"> 
-				{% block header %}
-				{% endblock %}
-			</div>
-				{# end div background image #}
-		</div>
-			<!-- end div class row -->
+				<h1>Header</h1>
+			</div> <!-- end header col-md-12 -->
+		</div> <!-- end row header -->
 
 		<div class="row">
-				<div class="col-md-3 p-5">
 
-					<div class="col-md-12 p-5" style="background-color: green">
+				<div class="col-md-3">
+
+					<div class="col-md-12 p-2 m-3" style="background-color: green">
 						<center><img src="assets/img/verrukkulluk-agenda.png" style="width: auto; height: 100px;"/></center>
 						<h2>
 							<i class="fa fa-calendar" style="color:white"></i>
@@ -62,12 +66,11 @@
 							Vegetarisch koken</h2>
 						<p>
 							Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p><br>
-					</div>
-					<!-- col-md-12 -->
+					</div> <!-- end col-md-12 agenda -->
 
 
-					<div class="col-md-12 p-5" style="background-color: red">
-						<center><img src="assets/img/verrukkulluk-login.png" style="width: auto; height: 100px;"/><center>
+					<div class="col-md-12 p-2 m-3" style="background-color: red">
+						<img src="assets/img/verrukkulluk-login.png" style="width: auto; height: 100px;"/>
 
 								<form role="form">
 									<div class="form-group">
@@ -76,8 +79,7 @@
 											Email
 										</label>
 										<input type="email" class="form-control" id="exampleInputEmail1"/>
-									</div>
-									{# end div class form-group e-mail #}
+									</div> <!-- end div class form-group e-mail -->
 
 									<div class="form-group">
 
@@ -86,7 +88,7 @@
 										</label>
 										<input type="password" class="form-control" id="exampleInputPassword1"/>
 									</div>
-									{# end div class form-group password #}
+									<!-- end div class form-group password -->
 
 									<div class="form-group">
 
@@ -95,46 +97,33 @@
 												Login
 											</button>
 										</center>
-									</div>
-									<!--end div class form group login button -->
+									</div> <!--end div class form group login button -->
 
-								</div>
-								<!-- end div class col-md-12 login -->
-							</div>
-						</div>
-						<!-- end col-md-3 voor agenda en login -->
-					</div>
-					<!-- end row agenda + login -->
-
-				</div>
+								</form> <!-- form login -->
+					</div> <!-- end col-md-12 login -->
+					
+				</div> <!-- end col-md-3 agenda + login -->
 
 				<div class="col-md-9">
 					<div class="row"> 
-					{%  block content %}
-					{%  endblock %}
-					</div>
-						{# end div class row#}
-				</div>
-					{# end div class col-md-9 Content #}
-
-					
-
-		</div>
+							<h1>CONTENT</h1>
+								{%  block content %}
+								{%  endblock %} 
+					</div> <!-- end div class row -->
+				</div> <!-- end div class col-md-9 Content -->
+		</div> <!-- end row agenda + login -->
 
 		<div class="row" style="background-color: orange">
-						<div class="col-md-12 p-5">
-							<img src="assets/img/verrukkulluk-pay-off.png" style="width: 150px; height: 150px;"/>
-							<img src="assets/img/verrukkulluk-contact.png" style="width: 150px; height: 150px;"/>
-							<address>
-								<font color="white">Verrukkulluk.nl<br>
-									Poststraat 2b<br>
-									Sittard<br>
-									info@verrukkulluk.nl</font>
-							</address>
-						</div>
-						{# end div class col-md-12 Contact #}
-					</div>
-		</div>			
+			 <div class="col-md-12 p-5">
+				<img src="assets/img/verrukkulluk-pay-off.png" style="width: 150px; height: 150px;"/>
+				<img src="assets/img/verrukkulluk-contact.png" style="width: 150px; height: 150px;"/>
+				<address>
+					<font color="white">Verrukkulluk.nl<br>
+						Poststraat 2b<br>
+						Sittard<br>
+						info@verrukkulluk.nl</font>
+				</address>
+			</div> <!-- end div class col-md-12 Contact -->
+		</div> <!-- end row contact -->
+	</div> <!-- end container-fluid -->			
 </body>
-
-</html>
