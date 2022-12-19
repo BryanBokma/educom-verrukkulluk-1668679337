@@ -23,12 +23,14 @@ class gerecht_info {
         AND record_type = '$record_type'";//je selecteert alles van de tabel gerecht_info en hierbij wil je gerecht_id en record_type_id hebben. 
         //linkerkant van het = teken is wat ik in mijn database heb gedefinieerd en aan de rechterkant van het = teken 
 
-        $info = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
-        $user = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
+        $return = [];
 
         $result = mysqli_query($this->connection, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+        $info = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
+        $user = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat.
             
         $info[] = [//gegevens van de array, deze zijn van gerecht_info
             "id" => $row["id"],
@@ -44,13 +46,15 @@ class gerecht_info {
             $user_id = $row["user_id"];
             $user = $this->selectUser($user_id);
 
-            $return[] = $info = $user;//als record_type O en/of F is. Dan haalt hij hierbij ook de user op. 
-
-            return($return);
+            //als record_type O en/of F is. Dan haalt hij hierbij ook de user op. 
 
         }//end if
 
+        $return[] = $info + $user;
+
     }//end while   
+
+    return($return);
 
 }//end public function selecteerGerecht_info
 
@@ -73,5 +77,3 @@ class gerecht_info {
     }//end deleteFavorite function
 
 }//end class gerecht_info
-
-?>

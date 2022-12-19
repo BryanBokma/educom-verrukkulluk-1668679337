@@ -14,11 +14,12 @@ require_once("lib/zoekfunctie.php");
 $db = new database();
 $boodschappen = new boodschappen($db->getConnection());
 $zoekfunctie = new zoekfunctie($db->getConnection());
+$info = new gerecht_info($db->getConnection());
 $gerecht = new gerecht($db->getConnection());
 
 // Verwerk De variable + select functie in een nieuwe variable
 // $zoekfunctie = $zoekfunctie->zoekFunctie("Pizza");
-$data = $gerecht->selecteerGerecht(3);
+$data = $info->selecteerGerecht_info(2, 'O');
 // $data = $boodschappen->boodschappenToevoegen(1, 1);
 
 // Return
