@@ -32,7 +32,7 @@ class gerecht_info {
         $info = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat. 
         $user = [];//hierbij maak je een lege array omdat de variable anders niet buiten de loop bestaat.
             
-        $info[] = [//gegevens van de array, deze zijn van gerecht_info
+        $info = [//gegevens van de array, deze zijn van gerecht_info
             "id" => $row["id"],
             "record_type" => $row["record_type"],
             "gerecht_id" => $row["gerecht_id"],

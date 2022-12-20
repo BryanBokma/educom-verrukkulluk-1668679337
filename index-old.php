@@ -19,7 +19,7 @@ $gerecht = new gerecht($db->getConnection());
 
 // Verwerk De variable + select functie in een nieuwe variable
 // $zoekfunctie = $zoekfunctie->zoekFunctie("Pizza");
-$data = $info->selecteerGerecht_info(2, 'O');
+$data = $info->selecteerGerecht_info(2, 'B');
 // $data = $boodschappen->boodschappenToevoegen(1, 1);
 
 // Return
