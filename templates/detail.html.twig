@@ -1,7 +1,44 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-	<img src="assets/img/logo-v2.png"/>
+
+<script>
+
+$(document).ready( function() {
+
+	$('.star').each( (index, elem) => {
+		const rating = {{data.0.gemiddeldeWaardering}}
+		const itemValue = $(elem).attr('data-value')
+              if(itemValue <= rating) {
+                $(elem).addClass('groen')
+              }// end if add groen
+	})//end data ophalen 
+
+	$(".star").click( function() {
+            const value = $(this).attr('data-value')
+
+	/// Clear all the red stars 
+    $(".star").removeClass('red')
+
+	$('.star').each( (index, elem) => {
+            const itemValue = $(elem).attr('data-value')
+              if(itemValue <= value) {
+                $(elem).addClass('red')
+              }//end if itemValue ster rood maken
+
+            })//end .star . each function
+
+	$.ajax({
+		url: `index.php?gerecht_id={{data.0.gerecht.id}}&action=addWaardering&rating=${value}`,
+		method: "GET",
+	})//end ajax function
+
+	})//end .click function
+
+})//end document .ready function
+</script>
+
+
 {% endblock %}
 
 {% block content %}
@@ -42,7 +79,11 @@ document.getElementById("defaultOpen").click();
 			</div>
 			<div class="col-md-2">
 				<h3>
-					****
+					<span class="star" data-value="1">*</span>
+					<span class="star" data-value="2">*</span>
+					<span class="star" data-value="3">*</span>
+					<span class="star" data-value="4">*</span>
+					<span class="star" data-value="5">*</span>
 				</h3>
 			</div>
 		</div>
@@ -140,7 +181,7 @@ document.getElementById("defaultOpen").click();
 			<div id="Opmerkingen" class="tabcontent">
 				{% for record in data.0.opmerkingen %}
 					<div class="row pt-3 p1-5">
-						<div class="col-md-2">
+						<div class="col-md-2 p-4">
 							<div class="row" style="background-image: url('assets/img/users/{{record.afbeelding}}'); background-position:center; background-size: cover; width: 100px; height: 100px; border-radius: 50%; border: 4px solid #fca01f;">
 							</div>
 						</div>
@@ -159,5 +200,8 @@ document.getElementById("defaultOpen").click();
 			</div> <!-- end opmerkingen tab -->
 
 		</div> <!-- end row tabs detail pagina -->
+
+		<pre> 
+		{{dump(data.0.gemiddeldeWaardering)}};
 
 {% endblock %}

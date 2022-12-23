@@ -23,8 +23,10 @@ require_once("lib/gerecht-info.php");
 require_once("lib/gerecht.php");
 
 $db = new database();
+$gerecht_info = new gerecht_info($db->getConnection());
 $gerecht = new gerecht($db->getConnection());
 $data = $gerecht->selecteerGerecht();
+
 
 
 /*
@@ -34,7 +36,7 @@ http://localhost/index.php?gerecht_id=4&action=detail
 
 $gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
 $action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
-
+$rating = isset($_GET["rating"]) ? $_GET["rating"] : [];
 
 switch($action) {
 
@@ -49,6 +51,18 @@ switch($action) {
             $data = $gerecht->selecteerGerecht($gerecht_id);
             $template = 'detail.html.twig';
             $title = "detail pagina";
+            break;
+        }
+
+        case "addWaardering": {
+            $addWaardering = $gerecht_info->addWaardering($gerecht_id, $rating); 
+            break;
+        }
+
+        case "berekenGemiddelde": {
+            $data = $gerecht_info->berekenGemiddelde($gerecht_id);
+            $template = 'detail.html.twig';
+            $title = "gemiddelde";
             break;
         }
 

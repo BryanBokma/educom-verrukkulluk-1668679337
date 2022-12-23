@@ -69,6 +69,12 @@ class gerecht {
         }
     }//end berekenPrijsVoorIngredienten function
 
+    private function selectGemiddeldeVanWaarderingen($gerecht_id) {
+        $data = $this->info->berekenGemiddelde($gerecht_id);
+
+        return($data);
+    }
+
     public function selecteerGerecht($gerecht_id = NULL) {
 
         $sql = "SELECT * FROM gerecht";
@@ -104,6 +110,7 @@ class gerecht {
 
             $berekenCalorieen = $this->berekenCalorieenVoorIngredienten($ingredienten);
             $berekenPrijs = $this->berekenPrijsVoorIngredienten($ingredienten);
+            $berekenGemiddelde = $this->selectGemiddeldeVanWaarderingen($gerecht_id);
             
 
             $gerechten[] = [
@@ -117,7 +124,8 @@ class gerecht {
                 "favoriet" => $favoriet,
                 "type" => $type,
                 "berekenCalorieen" => $berekenCalorieen,
-                "berekenPrijs" => $berekenPrijs
+                "berekenPrijs" => $berekenPrijs,
+                "gemiddeldeWaardering" => $berekenGemiddelde
             ];
 
         }// end while

@@ -69,11 +69,41 @@ class gerecht_info {
     public function deleteFavorite($gerecht_id, $user_id) {// Hierbij wordt door de user Favoriet verwijderd aan een gerecht. Zoals ook hieronder staat beschreven. 
 
         $sql = "DELETE FROM gerecht_info
-        WHERE record_type = 'F'
-        AND gerecht_id = $gerecht_id
-        AND user_id = $user_id";
+                WHERE record_type = 'F'
+                AND gerecht_id = $gerecht_id
+                AND user_id = $user_id";
 
         $result = mysqli_query($this->connection, $sql);// query wordt uitgevoerd om de data op te halen uit de database. 
     }//end deleteFavorite function
+
+    public function addWaardering($gerecht_id, $rating) { 
+        
+        $sql = "INSERT INTO gerecht_info (gerecht_id, record_type, nummeriekveld)
+        VALUES ($gerecht_id, 'W', $rating)";
+
+        return($this->connection->query($sql));
+    }//end addWaardering
+
+    public function berekenGemiddelde($gerecht_id) {
+        
+        $sql = "SELECT nummeriekveld FROM gerecht_info
+                WHERE record_type = 'W' 
+                AND gerecht_id = $gerecht_id";
+                
+        $result = mysqli_query($this->connection, $sql);
+        
+        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $waarderingen[] = $row["nummeriekveld"];
+        }
+
+        // bereken gemiddelde
+        $count= count($waarderingen);
+        $sum = array_sum($waarderingen);
+        $berekening = $sum/$count;
+        $berekeningRounded = round($berekening);
+    
+        return $berekeningRounded;
+        
+    }//end public function berekenGemiddelde
 
 }//end class gerecht_info

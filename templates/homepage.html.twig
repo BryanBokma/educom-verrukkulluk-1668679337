@@ -37,11 +37,11 @@
     {% for record in data %}
 <div class="col-md-6 p-5">
     
-	<div class="row" style="min-height: 400px">
+	<div class="row border-shadow-opmaak" style="min-height: 400px">
 		<div class="col-md-12" style="background-image: url('assets/img/gerechten/{{record.gerecht.afbeelding}}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>	
 	</div>
 
-    <div class="row"> 
+    <div class="row border-shadow-opmaak"> 
         <div class="col-md-6" style="background-color: #FFF">
 		    <h2 style="color: #6e8722;"> {{ record.gerecht.titel }} </h2>
         </div> 
@@ -56,13 +56,13 @@
                     
                 {% endfor %}-->
 
-    <div class="row"> 
+    <div class="row border-shadow-opmaak"> 
         <div class="col-md-12" style = "background-color: #FFF; min-height: 150px">
          {{ record.gerecht.korte_omschrijving }}
         </div>
     </div> 
 
-    <div class="row">
+    <div class="row border-shadow-opmaak">
         <div class="col-md-6" style="background-color: #FFF"> 
             <button class="button">Smullen!</button>
         </div>
