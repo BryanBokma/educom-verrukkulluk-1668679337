@@ -23,8 +23,11 @@ require_once("lib/gerecht-info.php");
 require_once("lib/gerecht.php");
 
 $db = new database();
+
 $gerecht_info = new gerecht_info($db->getConnection());
 $gerecht = new gerecht($db->getConnection());
+$boodschappen = new boodschappen($db->getConnection());
+
 $data = $gerecht->selecteerGerecht();
 
 
@@ -63,6 +66,13 @@ switch($action) {
             $data = $gerecht_info->berekenGemiddelde($gerecht_id);
             $template = 'detail.html.twig';
             $title = "gemiddelde";
+            break;
+        }
+
+        case "boodschappenlijst": {
+            $data = $boodschappen->ophalenBoodschappen($user_id);
+            $template = "boodschappen.html.twig";
+            $title = "boodschappenlijst";
             break;
         }
 

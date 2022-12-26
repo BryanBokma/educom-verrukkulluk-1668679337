@@ -1,0 +1,33 @@
+{% extends "main.html.twig" %}
+
+{% block header %}
+
+<script>
+        $(document).ready( function() {
+
+            const mySlides = $("#mySlides").MySlides({
+
+                const mySlides = [
+                    { src: "assets/img/gerechten/Scrambled-Eggs-With-Vegetables.jpg"},
+                    { src: "assets/img/gerechten/Vegan_Burger.jpg" },
+                    { src: "assets/img/gerechten/Sushi_Rolls.webp" },
+                    { src: "assets/img/gerechten/Pizza_Green.jpg" }
+                ]//end slides/image
+
+            })//end const mySlides
+
+            $("#background-image").vegas ({
+                overlay: 'assets/vegas/overlays/02.png',
+                slides: mySlides,
+                })//end . vegas
+
+        })//end .ready function
+
+    
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

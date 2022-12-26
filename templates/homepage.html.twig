@@ -35,6 +35,23 @@
 
 {# Loop #}
     {% for record in data %}
+<script>
+
+$(document).ready( function() {
+
+	$('.star-{{record.gerecht.id}}').each( (index, elem) => {
+
+		const rating = {{record.gemiddeldeWaardering}}
+		const itemValue = $(elem).attr('data-value')
+              if(itemValue <= rating) {
+                $(elem).addClass('groen')
+              }// end if add groen
+	})//end data ophalen 
+
+})//end document .ready function
+
+</script>
+
 <div class="col-md-6 p-5">
     
 	<div class="row border-shadow-opmaak" style="min-height: 400px">
@@ -46,7 +63,13 @@
 		    <h2 style="color: #6e8722;"> {{ record.gerecht.titel }} </h2>
         </div> 
         <div class="col-md-6"> 
-            <h3> **** </h3> 
+            <h3> 
+                <span class="star-{{record.gerecht.id}}" data-value="1">*</span>
+				<span class="star-{{record.gerecht.id}}" data-value="2">*</span>
+				<span class="star-{{record.gerecht.id}}" data-value="3">*</span>
+				<span class="star-{{record.gerecht.id}}" data-value="4">*</span>
+				<span class="star-{{record.gerecht.id}}" data-value="5">*</span>
+            </h3> 
         </div>
     </div>
 
@@ -64,7 +87,7 @@
 
     <div class="row border-shadow-opmaak">
         <div class="col-md-6" style="background-color: #FFF"> 
-            <button class="button">Smullen!</button>
+            <button class="button"><a href = "index.php?gerecht_id={{record.gerecht.id}}&action=detail">Smullen!</a></button>
         </div>
         <div class="col-md-2" style="background-color: #FFF">
 		    <i class="fas fa-user-friends" style="color:red;"></i> 4
