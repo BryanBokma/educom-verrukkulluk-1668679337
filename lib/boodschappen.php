@@ -4,10 +4,12 @@ class boodschappen {
 
     private $connection;
     private $ingre;
+    private $art;
 
     public function __construct($connection) {
         $this->connection = $connection;
         $this->ingre = new ingredient($connection);
+        $this->art = new artikel($connection);
     }
 
     private function selectIngredienten($gerecht_id) {
@@ -16,11 +18,17 @@ class boodschappen {
         return($data);
     }
 
+    private function selectArtikel($artikel_id) {
+        $data = $this->art->selecteerArtikel($artikel_id);
+
+        return($data);
+    }
+
     private function toevoegenArtikel($ingredient, $user_id) {
         $artikel_id = $ingredient["artikel_id"];
 
         $sql = "INSERT INTO boodschappen (artikel_id, user_id, aantal)
-        VALUES ($artikel_id, $user_id, 1)";//
+        VALUES ($artikel_id, $user_id, 1)";
         $result = mysqli_query($this->connection, $sql);
     }//end private function toevoegenArtikel
 

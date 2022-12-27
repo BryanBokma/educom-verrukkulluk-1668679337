@@ -21,6 +21,7 @@ require_once("lib/keuken_type.php");
 require_once("lib/ingredient.php");
 require_once("lib/gerecht-info.php");
 require_once("lib/gerecht.php");
+require_once("lib/boodschappen.php");
 
 $db = new database();
 
@@ -40,6 +41,7 @@ http://localhost/index.php?gerecht_id=4&action=detail
 $gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
 $action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
 $rating = isset($_GET["rating"]) ? $_GET["rating"] : [];
+$user_id = 1;
 
 switch($action) {
 

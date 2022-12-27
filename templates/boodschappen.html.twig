@@ -30,4 +30,39 @@
 
 {% block content %}
 
+<div class="col-md-12 background-white">          
+
+    <div class="row">                                                                                                                     
+        <h1 class="groen"> Boodschappen </h1>
+    </div>
+
+    <div class="row">
+            {% for record in data %}
+            {{dump(record.in.data)}}
+            <div class="row">
+                <div class="col-md-1" 
+                    style="background-image: url('assets/img/ingredienten/{{record.gerecht.afbeelding}}'); background-position: center; background-size: cover; height: 125px; width: 125px"> 
+                </div>
+                <div class="col-md-5-6" style="max-width: 500px">
+                    <h2> {{record.artikel.naam}} </h2>
+                    <div> {{record.artikel.omschrijving}} </div>
+                </div>
+                <div class="col-md-1">
+                <div class="row">
+                    <div class="text-align-center"> {{record.boodschappen.aantal}} </div>
+                </div>
+                </div>
+                <div class="col-md-1 col-md-1-2">                                                                                     
+                    <i class="fa fa-euro-sign fa-lg red"></i>  <span> {{record.prijzen}}  </span>
+                </div>
+                <div class="col-md-1">
+                    <i class="fa fa-check fa-lg groen"> </i>  
+                </div>
+                <div class="col-md-1">
+                    <i class="fa fa-trash fa-lg red"></i>
+                </div>
+            </div> <!-- end row in de loop -->
+        {% endfor %}
+</div> <!-- end div class col-md-12 -->
+
 {% endblock %}
