@@ -4,12 +4,12 @@ class boodschappen {
 
     private $connection;
     private $ingre;
-    private $art;
+    private $artikel;
 
     public function __construct($connection) {
         $this->connection = $connection;
         $this->ingre = new ingredient($connection);
-        $this->art = new artikel($connection);
+        $this->artikel = new artikel($connection);
     }
 
     private function selectIngredienten($gerecht_id) {
@@ -19,7 +19,7 @@ class boodschappen {
     }
 
     private function selectArtikel($artikel_id) {
-        $data = $this->art->selecteerArtikel($artikel_id);
+        $data = $this->artikel->selecteerArtikel($artikel_id);
 
         return($data);
     }
@@ -54,6 +54,28 @@ class boodschappen {
         return($berekenaantal);
     }
 
+    public function totaalPrijsBoodschappen($user_id) {
+        
+        $sql = "SELECT * FROM boodschappen
+        WHERE user_id = $user_id";
+
+        $totaalprijsboodschappen = 0;
+
+        $result = mysqli_query($this->connection, $sql);
+
+        while($boodschappen = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $artikel_id = $boodschappen["artikel_id"];
+            $artikel = $this->selectArtikel($artikel_id);
+
+            $totaalprijsartikelen = $artikel["prijs"] * $boodschappen["aantal"];
+
+            $totaalprijsboodschappen = $totaalprijsboodschappen + $totaalprijsartikelen;
+        }
+
+        return ($totaalprijsboodschappen);
+        
+    }
+
     public function ophalenBoodschappen($user_id) {
         $return = [];
 
@@ -62,7 +84,13 @@ class boodschappen {
 
         $result = mysqli_query($this->connection, $sql);
         while($boodschappen = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $return[] = $boodschappen;
+            $artikel_id = $boodschappen["artikel_id"];
+            $artikel = $this->selectArtikel($artikel_id);
+            
+            $return[] = [
+                "boodschappen" => $boodschappen,
+                "artikel" => $artikel
+            ];
         }//end while
 
         return($return);

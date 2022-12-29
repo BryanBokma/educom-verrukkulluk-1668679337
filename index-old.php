@@ -19,8 +19,9 @@ $gerecht = new gerecht($db->getConnection());
 
 // Verwerk De variable + select functie in een nieuwe variable
 // $zoekfunctie = $zoekfunctie->zoekFunctie("Pizza");
-$data = $info->selecteerGerecht_info(2, 'W');
+// $data = $info->selecteerGerecht_info(2, 'W');
 // $data = $boodschappen->boodschappenToevoegen(1, 1);
+$data = $boodschappen->totaalPrijsBoodschappen("");
 
 // Return
 echo "zoekfunctie.....................................<pre>";

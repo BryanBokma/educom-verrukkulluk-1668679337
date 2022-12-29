@@ -1,17 +1,12 @@
 <html lang="nl">
 	<head>
 
-		<title>Verrukkulluk
-			{{ TITEL }}
-		</title>
+		<title>Verrukkulluk {{ TITEL }} </title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 		<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/fonts.css"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css"/>
-
-		<link rel="stylesheet" href="css/vegas-style.css" />   
-   	 	<link rel="stylesheet" href="vegas/vegas.css" /> 
 
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
 
@@ -19,19 +14,31 @@
 		<script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
 		<script src="assets/jquery/tabs.js"></script>
 
-		<script src="assets/js/jquery.js"></script>
+		<link rel="stylesheet" href="assets/css/vegas-style.css"/>   
+   	 	<link rel="stylesheet" href="assets/vegas/vegas.css"/> 
+		<script src="assets/jquery-3.5.1.js"></script>
     	<script src="assets/vegas/vegas.js"></script>
 	</head>
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style = "width:2300px">
+
+		<div class="menu">
+            <div class="menu-trigger"> <i class="fa fa-bars fa-4x oranje"></i>
+                <div class="dropdown border-dropdown">
+                    <img src="assets/img/logo-v2.png" style="height: 150px; width: auto"/>
+                    <a href="http://localhost/educom-verrukkulluk-1668679088/index.php?action=ophalen_boodschappen" style="position: absolute; left: 1800px; top: 70px"><h1> Mijn Boodschappenlijst </h1> </a> 
+                </div> <!-- dropdown content -->
+            </div> <!-- button class -->
+        </div> <!-- dropdown -->
 
 		
-		<div class="row">
+		<div class="row"> <!-- vervangen door link naar homepage -->
 			<div class="col-md-12" style="background-image: url('assets/img/website/achtergrond-header-website.jpg')"> 
 				<img src="assets/img/logo-v2.png"/>
-			</div> <!-- end header col-md-12 -->
+			</div> <!-- end header col-md-12 --> 
+	
 			{% block header %} 
 			{% endblock %}
 		</div> <!-- end row header -->

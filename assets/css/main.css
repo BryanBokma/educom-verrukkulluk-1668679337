@@ -106,6 +106,10 @@ html, body {
     color: #6e8722;
   }
 
+  .oranje {
+    color: #fca01f;
+  }
+
   .pretty-font {
     font-family: "pretty_lilyregular";
   }
@@ -169,6 +173,53 @@ html, body {
 }
 .red {
   color: #F00;
+}
+
+.inset-border {
+  border-style: inset;
+}
+
+/* dropdown */
+
+.menu {
+  position: absolute;
+  top: 20px;
+  right: 200px;
+}
+
+.menu-trigger {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  z-index: 5000 !important;
+}
+
+.menu-trigger:hover {
+  background-color: none;
+}
+
+.menu-trigger:hover .dropdown {
+  top: 0px;
+}
+
+.dropdown {
+  position: fixed;
+  top: -400px;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-color: #FFF;
+  transition: all 0.4s ease;
+  padding: 40px;
+}
+
+/* border dropdown */
+
+.border-dropdown {
+  border: solid 0.08em #000;
+  border-radius: .1em;
+  padding: .2em .25em .15em; 
 }
 
 

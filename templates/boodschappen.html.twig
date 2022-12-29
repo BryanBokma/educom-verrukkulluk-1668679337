@@ -30,18 +30,18 @@
 
 {% block content %}
 
-<div class="col-md-12 background-white">          
+<div class="container-fluid border-shadow-opmaak p-5 m-5 inset border">          
 
-    <div class="row">                                                                                                                     
+    <div class="row p-5">                                                                                                                     
         <h1 class="groen"> Boodschappen </h1>
     </div>
 
     <div class="row">
             {% for record in data %}
-            {{dump(record.in.data)}}
-            <div class="row">
+            {% set begin = (((record.artikel.prijs * record.boodschappen.aantal)) / 100)|number_format(2, ',') %} 
+            <div class="row p-5 m-3">
                 <div class="col-md-1" 
-                    style="background-image: url('assets/img/ingredienten/{{record.gerecht.afbeelding}}'); background-position: center; background-size: cover; height: 125px; width: 125px"> 
+                    style="background-image: url('assets/img/ingredienten/{{record.artikel.afbeelding}}'); background-position: center; background-size: cover; height: 125px; width: 125px"> 
                 </div>
                 <div class="col-md-5-6" style="max-width: 500px">
                     <h2> {{record.artikel.naam}} </h2>
@@ -52,8 +52,8 @@
                     <div class="text-align-center"> {{record.boodschappen.aantal}} </div>
                 </div>
                 </div>
-                <div class="col-md-1 col-md-1-2">                                                                                     
-                    <i class="fa fa-euro-sign fa-lg red"></i>  <span> {{record.prijzen}}  </span>
+                <div class="col-md-1">                                                                                     
+                    <i class="fa fa-euro-sign fa-lg red"></i>  <span> {{begin}}  </span>
                 </div>
                 <div class="col-md-1">
                     <i class="fa fa-check fa-lg groen"> </i>  
@@ -61,8 +61,43 @@
                 <div class="col-md-1">
                     <i class="fa fa-trash fa-lg red"></i>
                 </div>
-            </div> <!-- end row in de loop -->
+            </div> <!-- end row in de loop, afbeeldingen/ingredienten/prijs en aantal -->
         {% endfor %}
+    </div> <!-- end div class row net boven de loop -->
+
+    <div class="row">
+
+        {% set totaal = 0 %}
+        {% for record in data %}
+
+            {% set begin = (((record.artikel.prijs * record.boodschappen.aantal)) / 100) %} 
+            {% set totaal = (totaal + begin)|number_format(2, ',') %} 
+
+        {% endfor %}
+
+        
+        
+        <div class="col-md-5 p-5">
+            <h1 class="red"> Totaal: </h1>
+        </div>
+        <div class="col-md-7 p-5">
+            {{ totaal }} <!-- format currency nog toevoegen, dit lukt mij alsnog niet, pakt het commando niet -->
+        </div>
+    </div>
+
+ {#   <div class="row p-5 m-3">
+        <div class="col-md-6">
+            <h1 class="red"> Totaal </h1>
+        </div>
+        <div class="col-md-1">                                                                                     
+            <i class="fa fa-euro-sign fa-lg red"></i>  <span> {{record.totaalPrijsBoodschappen}}  </span>
+        </div>
+
+    </div> <!-- end class row totaalprijsBoodschappen -->
+
 </div> <!-- end div class col-md-12 -->
+
+<pre>
+{{dump(data.0.boodschappen)}} #}
 
 {% endblock %}
