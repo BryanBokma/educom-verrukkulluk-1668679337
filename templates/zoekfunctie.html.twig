@@ -1,0 +1,31 @@
+{% extends "main.html.twig" %}
+
+{% block header %}
+
+<script>
+
+$(document).ready( function() {
+
+	const mySlides = [
+		{src: "assets/img/gerechten/{{data.0.gerechten.afbeelding}}"}
+	]// end mySlides images
+
+	 $("#background-image").vegas ({
+        overlay: 'assets/vegas/overlays/02.png',
+        slides: mySlides,
+    })//end . vegas background image
+
+})//end document .ready function
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+    {% for record in zoekfunctie %}
+
+    {#{{dump(record in zoekfunctie)}}#}
+
+    {% endfor %}
+
+{% endblock %}

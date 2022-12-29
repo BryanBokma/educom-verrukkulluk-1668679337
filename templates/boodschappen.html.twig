@@ -5,16 +5,12 @@
 <script>
         $(document).ready( function() {
 
-            const mySlides = $("#mySlides").MySlides({
-
                 const mySlides = [
                     { src: "assets/img/gerechten/Scrambled-Eggs-With-Vegetables.jpg"},
                     { src: "assets/img/gerechten/Vegan_Burger.jpg" },
                     { src: "assets/img/gerechten/Sushi_Rolls.webp" },
                     { src: "assets/img/gerechten/Pizza_Green.jpg" }
                 ]//end slides/image
-
-            })//end const mySlides
 
             $("#background-image").vegas ({
                 overlay: 'assets/vegas/overlays/02.png',
@@ -30,7 +26,7 @@
 
 {% block content %}
 
-<div class="container-fluid border-shadow-opmaak p-5 m-5 inset border">          
+<div class="container-fluid border-shadow-opmaak p-5 m-5 inset border" style="height: 900px; width: 1620px;">          
 
     <div class="row p-5">                                                                                                                     
         <h1 class="groen"> Boodschappen </h1>

@@ -22,13 +22,16 @@ require_once("lib/ingredient.php");
 require_once("lib/gerecht-info.php");
 require_once("lib/gerecht.php");
 require_once("lib/boodschappen.php");
+require_once("lib/zoekfunctie.php");
 
 $db = new database();
 
 $gerecht_info = new gerecht_info($db->getConnection());
 $gerecht = new gerecht($db->getConnection());
 $boodschappen = new boodschappen($db->getConnection());
+$zoekfunctie = new zoekfunctie($db->getConnection());
 
+//$data = $zoekfunctie->zoekFunctie($titel);
 $data = $gerecht->selecteerGerecht();
 
 
@@ -75,6 +78,13 @@ switch($action) {
             $data = $boodschappen->ophalenBoodschappen($user_id);
             $template = "boodschappen.html.twig";
             $title = "boodschappenlijst";
+            break;
+        }
+
+        case "zoekfunctie": {
+            $data = $zoekfunctie->zoekFunctie($titel);
+            $template = "zoekfunctie.html.twig";
+            $title = "zoekfunctie";
             break;
         }
 

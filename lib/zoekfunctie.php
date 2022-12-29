@@ -8,8 +8,7 @@ class zoekfunctie {
         $this->connection = $connection;
     }
 
-    public function zoekFunctie($titel)
-    {
+    public function zoekFunctie($titel) {
 
         $sql = "SELECT * FROM gerecht
         WHERE titel LIKE '%$titel%'";
@@ -25,6 +24,6 @@ class zoekfunctie {
         return ($alleinfo);
     }//end public function zoekFunctie
 
-    }//end class zoekfunctie
+}//end class zoekfunctie
 
 ?>

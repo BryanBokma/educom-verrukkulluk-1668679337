@@ -6,6 +6,15 @@
 
 $(document).ready( function() {
 
+	const mySlides = [
+		{src: "assets/img/gerechten/{{data.0.gerecht.afbeelding}}"}
+	]// end mySlides images
+
+	 $("#background-image").vegas ({
+        overlay: 'assets/vegas/overlays/02.png',
+        slides: mySlides,
+    })//end . vegas background image
+
 	$('.star').each( (index, elem) => {
 		const rating = {{data.0.gemiddeldeWaardering}}
 		const itemValue = $(elem).attr('data-value')
@@ -202,6 +211,6 @@ document.getElementById("defaultOpen").click();
 		</div> <!-- end row tabs detail pagina -->
 
 		<pre> 
-		{{dump(data.0.gemiddeldeWaardering)}};
+		{{dump(data.0.gerecht.afbeelding)}}
 
 {% endblock %}
