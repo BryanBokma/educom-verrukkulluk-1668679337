@@ -83,8 +83,8 @@ switch($action) {
 
         case "zoekfunctie": {
             $zoekfunctie = $zoekfunctie->zoekFunctie($zoeken);
-            $template = "homepage.html.twig";
-            $title = "homepage";
+            $template = "zoekfunctie.html.twig";
+            $title = "detail pagina";
             break;
             var_dump($zoekfunctie);
         }
@@ -106,4 +106,4 @@ $template = $twig->load($template);
 
 
 /// En tonen die handel!
-echo $template->render(["title" => $title, "data" => $data]);
+echo $template->render(["title" => $title, "data" => $data, "zoekfunctie" => $zoekfunctie]);

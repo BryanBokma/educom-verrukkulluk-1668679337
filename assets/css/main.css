@@ -66,6 +66,10 @@ html, body {
     font-size: 16px;
 }
 
+.wit-ruimte-main {
+  width: 2300px;
+}
+
 /* Style the tab */
 .tab {
     overflow: hidden;
@@ -108,6 +112,18 @@ html, body {
 
   .oranje {
     color: #fca01f;
+  }
+
+  .rood {
+    color: #dc3439;
+  }
+
+  .wit {
+    color: #FFF;
+  }
+
+  .achtergrond-kleur-homepage {
+    background-color: #FFF;
   }
 
   .pretty-font {
@@ -200,18 +216,19 @@ html, body {
 }
 
 .menu-trigger:hover .dropdown {
-  top: 0px;
+  top: -20px;
 }
 
 .dropdown {
-  position: fixed;
+  position: absolute;
   top: -400px;
-  left: 0;
+  left: -2156px;
   right: 0;
   height: 200px;
   background-color: #FFF;
   transition: all 0.4s ease;
   padding: 40px;
+  width: 2276px;
 }
 
 /* border dropdown */
@@ -321,5 +338,16 @@ html, body {
   width: auto;
 }
 
+/* boodschappenlijst */
+
+.aantal-border {
+  border: 1px solid;
+  border-color: #008000
+}
+
+.totaal-border {
+  border: 1px solid;
+  border-color: #008000
+}
 
   

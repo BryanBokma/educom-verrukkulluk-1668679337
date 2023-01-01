@@ -32,7 +32,7 @@ $(document).ready( function() {
     </div>
 
     <div class="col-md-9">
-        <a href="http://localhost/educom-verrukkulluk-1668679337/index.php?gerecht_id={{record.id}}&action=detail">
+        <a href="http://localhost/educom-verrukkulluk-1668679337/index.php?gerecht_id={{record.id}}&action=detail" style="text-decoration: none;">
             <h2> {{record.titel}} </h2>
         </a>
         <div>
@@ -44,9 +44,5 @@ $(document).ready( function() {
 </div> {# end col-md-12 #}
 
 {% endfor %}
-
-<pre>
-{{dump(zoekfunctie)}}
-
 
 {% endblock %}

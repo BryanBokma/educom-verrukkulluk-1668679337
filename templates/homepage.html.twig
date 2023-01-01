@@ -55,7 +55,7 @@ $(document).ready( function() {
 	</div>
 
     <div class="row border-shadow-opmaak"> 
-        <div class="col-md-6" style="background-color: #FFF">
+        <div class="col-md-6 achtergrond-kleur-homepage">
 		    <h2 style="color: #6e8722;"> {{ record.gerecht.titel }} </h2>
         </div> 
         <div class="col-md-6"> 
@@ -82,17 +82,17 @@ $(document).ready( function() {
     </div> 
 
     <div class="row border-shadow-opmaak">
-        <div class="col-md-6" style="background-color: #FFF"> 
+        <div class="col-md-6 achtergrond-kleur-homepage"> 
             <button class="button"><a href = "index.php?gerecht_id={{record.gerecht.id}}&action=detail" style="text-decoration: none;">Smullen!</a></button>
         </div>
-        <div class="col-md-2" style="background-color: #FFF">
-		    <i class="fas fa-user-friends" style="color:red;"></i> 4
+        <div class="col-md-2 achtergrond-kleur-homepage">
+		    <i class="fas fa-user-friends rood"></i> 4
         </div>
-        <div class="col-md-2" style="background-color: #FFF"> 
-            <i class="fa fa-euro-sign" style="color:red"></i> {{ record.berekenPrijs |round(2)}}
+        <div class="col-md-2 achtergrond-kleur-homepage"> 
+            <i class="fa fa-euro-sign rood"></i> {{ record.berekenPrijs |round(2)}}
         </div>
-        <div class="col-md-2" style="background-color: #FFF"> 
-            <i class="fa fa-fire" style="color:red"></i> {{ record.berekenCalorieen |round(0)}}
+        <div class="col-md-2 achtergrond-kleur-homepage"> 
+            <i class="fa fa-fire rood"></i> {{ record.berekenCalorieen |round(0)}}
         </div>
     </div>
 
