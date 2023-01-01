@@ -7,7 +7,7 @@
 $(document).ready( function() {
 
 	const mySlides = [
-		{src: "assets/img/gerechten/{{data.0.gerechten.afbeelding}}"}
+		{src: "assets/img/gerechten/{{data.0.gerecht.afbeelding}}"}
 	]// end mySlides images
 
 	 $("#background-image").vegas ({
@@ -22,10 +22,31 @@ $(document).ready( function() {
 
 {% block content %}
 
-    {% for record in zoekfunctie %}
+{% for record in zoekfunctie %}
+<div class="col-md-12">
 
-    {#{{dump(record in zoekfunctie)}}#}
+<div class="row">
 
-    {% endfor %}
+    <div class="col-md-3" 
+    style="background-image: url('assets/img/gerechten{{record.afbeelding}}'); background-position: center; background-size: cover; height: 180px; width: 160">
+    </div>
+
+    <div class="col-md-9">
+        <a href="http://localhost/educom-verrukkulluk-1668679337/index.php?gerecht_id={{record.id}}&action=detail">
+            <h2> {{record.titel}} </h2>
+        </a>
+        <div>
+            {{record.korte_omschrijving}}
+        </div>
+    </div> <!-- end titel + korte omschrijving -->
+
+</div> <!-- end row zoekfunctie -->
+</div> {# end col-md-12 #}
+
+{% endfor %}
+
+<pre>
+{{dump(zoekfunctie)}}
+
 
 {% endblock %}

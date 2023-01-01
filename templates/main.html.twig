@@ -26,10 +26,19 @@
 
 	<div id="background-image" style="height: 900px; overflow-x: hidden;">
 
+		<form action="index.php" method="GET">
+
+			<div class="input-container plaatsing-zoek-balk">
+				<i class="fa fa-search fa-lg plaatsing-icon-zoeken"></i>
+				<input type="text" class="zoek-balk" name="zoeken" placeholder="Zoeken">
+			</div> <!-- end zoeken -->
+			
+		</form> {# end form zoeken #}
+
 		<div class="menu">
             <div class="menu-trigger"> <i class="fa fa-bars fa-4x oranje"></i>
                 <div class="dropdown border-dropdown">
-                    <img src="assets/img/logo-v2.png" style="height: 150px; width: auto"/>
+                    <img src="assets/img/logo-v2.png" style="height: 150px; width: auto; plaatsing-navigation-menu plaatsing-navigation-menu-logo menu-dropdown-logo-size"/>
                     <a href="http://localhost/educom-verrukkulluk-1668679337/index.php?action=boodschappenlijst" style="position: absolute; left: 1800px; top: 70px; text-decoration: none;"><h1> Mijn Boodschappenlijst </h1> </a> 
                 </div> <!-- dropdown content -->
             </div> <!-- button class -->
@@ -38,7 +47,7 @@
 		
 		<div class="row"> <!-- vervangen door link naar homepage -->
 			<div class="col-md-12">
-				<img src="assets/img/logo-v2.png"/>
+				<a href="http://localhost/educom-verrukkulluk-1668679337/index.php"> <img src="assets/img/logo-v2.png"/> </a>
 			</div> <!-- end header col-md-12 --> 
 	
 			{% block header %} 

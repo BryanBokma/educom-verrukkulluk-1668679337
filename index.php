@@ -31,7 +31,6 @@ $gerecht = new gerecht($db->getConnection());
 $boodschappen = new boodschappen($db->getConnection());
 $zoekfunctie = new zoekfunctie($db->getConnection());
 
-//$data = $zoekfunctie->zoekFunctie($titel);
 $data = $gerecht->selecteerGerecht();
 
 
@@ -45,6 +44,7 @@ $gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
 $action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
 $rating = isset($_GET["rating"]) ? $_GET["rating"] : [];
 $user_id = 1;
+$zoeken = isset($_GET['zoeken']) ? $_GET["zoeken"] : NULL; //input text veld main ophalen
 
 switch($action) {
 
@@ -82,15 +82,22 @@ switch($action) {
         }
 
         case "zoekfunctie": {
-            $data = $zoekfunctie->zoekFunctie($titel);
-            $template = "zoekfunctie.html.twig";
-            $title = "zoekfunctie";
+            $zoekfunctie = $zoekfunctie->zoekFunctie($zoeken);
+            $template = "homepage.html.twig";
+            $title = "homepage";
             break;
+            var_dump($zoekfunctie);
         }
 
         /// etc
 
 }
+
+if ($zoeken != NULL) {
+    $zoekfunctie = $zoekfunctie->zoekFunctie($zoeken);
+    $template = "zoekfunctie.html.twig";
+    $title = "zoek functie pagina";
+} // end if
 
 
 /// Onderstaande code schrijf je idealiter in een layout klasse of iets dergelijks
