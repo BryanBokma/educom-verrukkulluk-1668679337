@@ -114,4 +114,4 @@ $template = $twig->load($template);
 
 
 /// En tonen die handel!
-echo $template->render(["title" => $title, "data" => $data, "zoekfunctie" => $zoekfunctie]);
+echo $template->render(["title" => $title, "data" => $data, "totaalprijs" => $totaalprijs, "zoekfunctie" => $zoekfunctie]);
