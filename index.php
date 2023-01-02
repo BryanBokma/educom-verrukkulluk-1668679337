@@ -81,6 +81,14 @@ switch($action) {
             break;
         }
 
+        case "boodschappen_toevoegen": {
+            $data = $boodschappen->boodschappenToevoegen($gerecht_id, $user_id);
+            $totaalprijs = $boodschappen->totaalPrijsBoodschappen($user_id);
+            $template = "boodschappen.html.twig";
+            $title = "boodschappen";
+            break;
+        }
+
         case "zoekfunctie": {
             $zoekfunctie = $zoekfunctie->zoekFunctie($zoeken);
             $template = "zoekfunctie.html.twig";

@@ -64,17 +64,17 @@ document.getElementById("defaultOpen").click();
 
 		<div class="row">
 			<div class="col-md-2">
-				<i class="fas fa-user-friends" style="color:#b31714"></i>
+				<i class="fas fa-user-friends rood"></i>
 				4
 			</div>
 
 			<div class="col-md-2">
-				<i class="fa fa-euro-sign" style="color:#b31714"></i>
+				<i class="fa fa-euro-sign rood"></i>
 				{{ data.0.berekenPrijs |round(2)}}
 			</div>
 
 			<div class="col-md-2">
-				<i class="fa fa-fire" style="color:#b31714"></i>
+				<i class="fa fa-fire rood"></i>
 				{{ data.0.berekenCalorieen |round(2)}}
 			</div>
 		</div>
@@ -125,7 +125,8 @@ document.getElementById("defaultOpen").click();
 
 				<div class="row p-4">
 					<div class="col-md-11">
-						<button class="button">Op Lijst</button>
+						<a href="http://localhost/educom-verrukkulluk-1668679337/index.php?gerecht_id={{data.0.gerecht.id}}&action=add_boodschappen" class="no-text-decoration">
+						<button class="button">Op Lijst</button> </a>
 					</div>
 					<div class="col-md-1">
 						<i class="fa fa-heart fa-2x" style="color: red"></i>
