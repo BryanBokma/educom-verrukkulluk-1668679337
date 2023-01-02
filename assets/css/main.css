@@ -67,7 +67,7 @@ html, body {
 }
 
 .wit-ruimte-main {
-  width: 2300px;
+  width: 1700px;
 }
 
 /* Style the tab */
@@ -140,7 +140,7 @@ html, body {
     border: 0;
     border-radius: 100px;
     box-sizing: border-box;
-    color: #ffffff;
+    color: #FFF;
     cursor: pointer;
     display: inline-flex;
     font-family: "pretty_lilyregular";
@@ -348,6 +348,16 @@ html, body {
 .totaal-border {
   border: 1px solid;
   border-color: #008000
+}
+
+.scroll-boodschappenlijst {
+  height: 700px;
+  overflow-y: scroll;
+
+}
+
+.scroll-boodschappenlijst::-webkit-scrollbar {
+  display: none;
 }
 
   

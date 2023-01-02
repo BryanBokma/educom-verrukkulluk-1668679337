@@ -45,6 +45,7 @@ $action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
 $rating = isset($_GET["rating"]) ? $_GET["rating"] : [];
 $user_id = 1;
 $zoeken = isset($_GET['zoeken']) ? $_GET["zoeken"] : NULL; //input text veld main ophalen
+$totaalprijs = $boodschappen->totaalPrijsBoodschappen($user_id);
 
 switch($action) {
 
@@ -83,7 +84,6 @@ switch($action) {
 
         case "boodschappen_toevoegen": {
             $data = $boodschappen->boodschappenToevoegen($gerecht_id, $user_id);
-            $totaalprijs = $boodschappen->totaalPrijsBoodschappen($user_id);
             $template = "boodschappen.html.twig";
             $title = "boodschappen";
             break;
@@ -94,7 +94,6 @@ switch($action) {
             $template = "zoekfunctie.html.twig";
             $title = "detail pagina";
             break;
-            var_dump($zoekfunctie);
         }
 
         /// etc

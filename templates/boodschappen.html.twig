@@ -32,7 +32,7 @@
         <h1 class="groen"> Boodschappen </h1>
     </div>
 
-    <div class="row">
+    <div class="row scroll-boodschappenlijst">
             {% for record in data %}
             {% set begin = (((record.artikel.prijs * record.boodschappen.aantal)) / 100)|number_format(2, ',') %} 
             <div class="row p-5 m-3">
@@ -58,6 +58,7 @@
                     <i class="fa fa-trash fa-lg red"></i>
                 </div>
             </div> <!-- end row in de loop, afbeeldingen/ingredienten/prijs en aantal -->
+             
         {% endfor %}
     </div> <!-- end div class row net boven de loop -->
 
@@ -67,7 +68,7 @@
         {% for record in data %}
 
             {% set begin = (((record.artikel.prijs * record.boodschappen.aantal)) / 100) %} 
-            {% set totaal = (totaal + begin)|number_format(2, ',') %} 
+            {% set totaal = (totaal + begin) %} 
 
         {% endfor %}
 
@@ -77,23 +78,9 @@
             <h1 class="red"> Totaal: </h1>
         </div>
         <div class="col-md-7 p-5">
-            {{ totaal }} <!-- format currency nog toevoegen, dit lukt mij alsnog niet, pakt het commando niet -->
+            {{ totaal|number_format(2, ',') }} <!-- format currency nog toevoegen, dit lukt mij alsnog niet, pakt het commando niet -->
         </div>
     </div>
 
- {#   <div class="row p-5 m-3">
-        <div class="col-md-6">
-            <h1 class="red"> Totaal </h1>
-        </div>
-        <div class="col-md-1">                                                                                     
-            <i class="fa fa-euro-sign fa-lg red"></i>  <span> {{record.totaalPrijsBoodschappen}}  </span>
-        </div>
-
-    </div> <!-- end class row totaalprijsBoodschappen -->
-
-</div> <!-- end div class col-md-12 -->
-
-<pre>
-{{dump(data.0.boodschappen)}} #}
 
 {% endblock %}
